@@ -49,8 +49,8 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanel1" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jPanel1" min="-2" pref="1024" max="-2" attributes="0"/>
+              <EmptySpace pref="27" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -72,8 +72,8 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="tab" max="32767" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="tab" min="-2" pref="1134" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -104,42 +104,49 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jScrollPane2" alignment="0" max="32767" attributes="0"/>
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="lblNome" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lblCelular" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lblEmail" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lblEndereco" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lblCpf" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="txtEndereco" pref="525" max="32767" attributes="0"/>
-                                      <Component id="txtEmail" alignment="1" max="32767" attributes="0"/>
-                                      <Component id="txtCelular" alignment="1" max="32767" attributes="0"/>
-                                      <Component id="txtNomeCliente" alignment="1" max="32767" attributes="0"/>
-                                      <Component id="txtCpf" max="32767" attributes="0"/>
-                                  </Group>
-                              </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                                   <Component id="btnLimparCLiente" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
                                   <Component id="btnSalvarCliente" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="609" max="32767" attributes="0"/>
+                                  <EmptySpace pref="557" max="32767" attributes="0"/>
                                   <Component id="btnAlterarCliente" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
                                   <Component id="btnExcluirCliente" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                                   <Component id="btnPesquisarCliente" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="lblNome" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lblCelular" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lblEmail" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lblEndereco" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lblCpf" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="txtCelular" min="-2" pref="525" max="-2" attributes="0"/>
+                                              <Component id="txtNomeCliente" min="-2" pref="525" max="-2" attributes="0"/>
+                                              <Component id="txtEmail" alignment="0" min="-2" pref="525" max="-2" attributes="0"/>
+                                              <Component id="txtEndereco" alignment="0" min="-2" pref="525" max="-2" attributes="0"/>
+                                              <Component id="txtCpf" min="-2" pref="525" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                                          <Component id="jScrollPane2" min="-2" pref="1004" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace max="32767" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -179,9 +186,8 @@
                               <Component id="btnExcluirCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btnPesquisarCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                           <Component id="jScrollPane2" min="-2" pref="136" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -235,6 +241,7 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtNomeCliente">
                   <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNomeClienteActionPerformed"/>
                     <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNomeClienteKeyReleased"/>
                   </Events>
                 </Component>
@@ -299,7 +306,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jScrollPane1" pref="1174" max="32767" attributes="0"/>
+                          <Component id="jScrollPane1" pref="1122" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -389,7 +396,6 @@
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="jPanel9" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                           <Component id="jScrollPane3" min="-2" pref="139" max="-2" attributes="0"/>
@@ -475,6 +481,7 @@
                           <ComponentRef name="btngFormaDePagamento"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Dinheiro"/>
+                        <Property name="enabled" type="boolean" value="false"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbDinheiroActionPerformed"/>
@@ -486,6 +493,7 @@
                           <ComponentRef name="btngFormaDePagamento"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="D&#xe9;bito"/>
+                        <Property name="enabled" type="boolean" value="false"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbDebitoActionPerformed"/>
@@ -497,6 +505,7 @@
                           <ComponentRef name="btngFormaDePagamento"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Cr&#xe9;dito"/>
+                        <Property name="enabled" type="boolean" value="false"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbCreditoActionPerformed"/>
@@ -537,18 +546,16 @@
                                       <EmptySpace max="32767" attributes="0"/>
                                       <Component id="txtProduto" min="-2" pref="273" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <Component id="lblDescricao" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="txtDescricao" min="-2" pref="273" max="-2" attributes="0"/>
-                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="lblUnidade1" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="32767" attributes="0"/>
-                                          <Component id="cbNomeCliente" min="-2" pref="272" max="-2" attributes="0"/>
-                                      </Group>
+                                  <Group type="102" attributes="0">
+                                      <Component id="lblDescricao" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="txtDescricao" min="-2" pref="273" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="lblUnidade1" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="cbNomeCliente" min="-2" pref="272" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
@@ -961,6 +968,9 @@
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtTotalActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtDesconto">
                       <Properties>

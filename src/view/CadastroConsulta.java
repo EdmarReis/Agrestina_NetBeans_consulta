@@ -8,24 +8,16 @@ import dao.ClienteDAO;
 import dao.PedidoDAO;
 import dao.VendaProdutoDAO;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
-import javax.swing.JFormattedTextField;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 import model.Cliente;
@@ -57,10 +49,9 @@ public class CadastroConsulta extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-    
+
     //txtCpf = new JFormattedTextField(new MaskFormatter("###.###.###-##"));
     //txtCelular = new JFormattedTextField(new MaskFormatter("(##) #####-####"));
-   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -180,6 +171,11 @@ public class CadastroConsulta extends javax.swing.JFrame {
 
         lblCpf.setText("CPF/CNPJ");
 
+        txtNomeCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNomeClienteActionPerformed(evt);
+            }
+        });
         txtNomeCliente.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtNomeClienteKeyReleased(evt);
@@ -223,34 +219,38 @@ public class CadastroConsulta extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblNome)
-                            .addComponent(lblCelular)
-                            .addComponent(lblEmail)
-                            .addComponent(lblEndereco)
-                            .addComponent(lblCpf))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtEndereco, javax.swing.GroupLayout.DEFAULT_SIZE, 525, Short.MAX_VALUE)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtCelular, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtNomeCliente, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtCpf)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(17, 17, 17)
                         .addComponent(btnLimparCLiente)
                         .addGap(53, 53, 53)
                         .addComponent(btnSalvarCliente)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 609, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 557, Short.MAX_VALUE)
                         .addComponent(btnAlterarCliente)
                         .addGap(54, 54, 54)
                         .addComponent(btnExcluirCliente)
                         .addGap(47, 47, 47)
                         .addComponent(btnPesquisarCliente)
-                        .addGap(18, 18, 18)))
-                .addContainerGap())
+                        .addGap(24, 24, 24))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblNome)
+                                    .addComponent(lblCelular)
+                                    .addComponent(lblEmail)
+                                    .addComponent(lblEndereco)
+                                    .addComponent(lblCpf))
+                                .addGap(35, 35, 35)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(8, 8, 8)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1004, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -282,9 +282,8 @@ public class CadastroConsulta extends javax.swing.JFrame {
                     .addComponent(btnAlterarCliente)
                     .addComponent(btnExcluirCliente)
                     .addComponent(btnPesquisarCliente))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         tab.addTab("Clientes", jPanel3);
@@ -295,7 +294,7 @@ public class CadastroConsulta extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1174, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1122, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -327,6 +326,7 @@ public class CadastroConsulta extends javax.swing.JFrame {
 
         btngFormaDePagamento.add(rbDinheiro);
         rbDinheiro.setText("Dinheiro");
+        rbDinheiro.setEnabled(false);
         rbDinheiro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rbDinheiroActionPerformed(evt);
@@ -335,6 +335,7 @@ public class CadastroConsulta extends javax.swing.JFrame {
 
         btngFormaDePagamento.add(rbDebito);
         rbDebito.setText("Débito");
+        rbDebito.setEnabled(false);
         rbDebito.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rbDebitoActionPerformed(evt);
@@ -343,6 +344,7 @@ public class CadastroConsulta extends javax.swing.JFrame {
 
         btngFormaDePagamento.add(rbCredito);
         rbCredito.setText("Crédito");
+        rbCredito.setEnabled(false);
         rbCredito.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rbCreditoActionPerformed(evt);
@@ -463,16 +465,15 @@ public class CadastroConsulta extends javax.swing.JFrame {
                         .addComponent(lblProduto)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txtProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel7Layout.createSequentialGroup()
-                            .addComponent(lblDescricao)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, Short.MAX_VALUE))
-                        .addGroup(jPanel7Layout.createSequentialGroup()
-                            .addComponent(lblUnidade1)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cbNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(lblDescricao)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(lblUnidade1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cbNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
@@ -625,6 +626,11 @@ public class CadastroConsulta extends javax.swing.JFrame {
         jLabel9.setText("Total");
 
         txtTotal.setEditable(false);
+        txtTotal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTotalActionPerformed(evt);
+            }
+        });
 
         txtDesconto.setEditable(false);
 
@@ -740,7 +746,6 @@ public class CadastroConsulta extends javax.swing.JFrame {
                                     .addComponent(lblFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -755,8 +760,8 @@ public class CadastroConsulta extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(tab)
-                .addContainerGap())
+                .addComponent(tab, javax.swing.GroupLayout.PREFERRED_SIZE, 1134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -780,8 +785,8 @@ public class CadastroConsulta extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1024, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -794,7 +799,7 @@ public class CadastroConsulta extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
+
     private void btnLimparCLienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparCLienteActionPerformed
         // TODO add your handling code here:
         limpaTelaCliente();
@@ -833,7 +838,9 @@ public class CadastroConsulta extends javax.swing.JFrame {
             limpaTelaCliente();
         } else {
             if (question == JOptionPane.YES_OPTION) {
-                excluirCliente();
+                //excluirCliente();
+                ClienteDAO clienteDao = new ClienteDAO();
+                clienteDao.excluirCliente(txtCpf.getText());
                 limpaTelaCliente();
                 pesquisarClientes();
 
@@ -859,7 +866,7 @@ public class CadastroConsulta extends javax.swing.JFrame {
         // TODO add your handling code here:
         DiaHora r = new DiaHora(txtHora);
         r.start();
-       
+
     }//GEN-LAST:event_formWindowOpened
 
     //pesquisa o produto adicionado na linha codigo e joga informacoes na jtable
@@ -880,6 +887,7 @@ public class CadastroConsulta extends javax.swing.JFrame {
 
     private void btnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarActionPerformed
         // TODO add your handling code here:
+        //JOptionPane.showOptionDialog(rootPane, evt, usuario, controle, HEIGHT, icon, options, table)
         PedidoDAO pedidoDao = new PedidoDAO();
         Cliente nomeToCliente = new Cliente();
         Produto precoToProduto = new Produto();
@@ -894,32 +902,31 @@ public class CadastroConsulta extends javax.swing.JFrame {
                 Object desconto;
                 Object precoTotal = 0;
                 String operador = lblOperador.getText();
-                
+
                 Date dataCompleta;
                 SimpleDateFormat sdfDia = new SimpleDateFormat("yyyy-MM-dd");
                 Calendar c = Calendar.getInstance();
                 java.util.Date diaCompleto = c.getTime();
                 String anoCompleto = sdfDia.format(diaCompleto).toString();
-                
+
                 String formaPagamento = null;
-                
-                if(rbCredito.isSelected()){
+
+                if (rbCredito.isSelected()) {
                     formaPagamento = "Crédito";
                     txtAcrecimo.setText("0");
                 }
-                if(rbDebito.isSelected()){
+                if (rbDebito.isSelected()) {
                     formaPagamento = "Débito";
                     txtAcrecimo.setText("3");
                 }
-                if(rbDinheiro.isSelected()){
+                if (rbDinheiro.isSelected()) {
                     formaPagamento = "Dinheiro";
                     txtAcrecimo.setText("6");
                 }
-                
-                
+
                 System.out.println(anoCompleto);
                 System.out.println(formaPagamento);
-                
+
                 for (int i = 0; i < tblProdutos.getRowCount(); i++) {
                     codigoProduto = (String) tblProdutos.getValueAt(i, 1);
                     nomeProduto = (String) tblProdutos.getValueAt(i, 2);
@@ -927,22 +934,29 @@ public class CadastroConsulta extends javax.swing.JFrame {
                     precoUnitario = Double.parseDouble((String) tblProdutos.getValueAt(i, 4));
                     desconto = tblProdutos.getValueAt(i, 5);
                     precoTotal = tblProdutos.getValueAt(i, 6);
-                    
+
                     //insertVendaProduto(codigoProduto, nomeProduto, quantidade, precoUnitario, desconto, precoTotal, formaPagamento, data, operador, nomeCliente);
                     vendaProdutoDao.insertVendaProduto(codigoProduto, nomeProduto, quantidade, precoUnitario, desconto, precoTotal, formaPagamento, anoCompleto, operador, nomeCliente);
-                    
+
                 }
-                
+
                 Double campoTotal = Double.parseDouble(txtTotal.getText() + txtAcrecimo.getText());
-               
+
                 nomeToCliente.setNome(nomeCliente);
                 precoToProduto.setPrecoTotal(campoTotal);
                 pedidoDao.insertPedido(nomeToCliente, precoToProduto);
                 System.out.println(nomeToCliente.getNome());
                 System.out.println(precoToProduto.getPrecoTotal());
                 limpaTelaETabela();
-            } else {
-                JOptionPane.showMessageDialog(null, "Verifique se ha itens adicionados e se a forma de pagamento foi selecionada.", "Erro", JOptionPane.ERROR_MESSAGE);
+            }else if (tblProdutos.getRowCount() == 0) {
+                JOptionPane.showMessageDialog(null, "Verifique se ha itens adicionados.", "Erro", JOptionPane.ERROR_MESSAGE);
+            }else {
+                JOptionPane.showMessageDialog(null, "Selecione a forma de pagamento", "Atenção", JOptionPane.INFORMATION_MESSAGE);
+                rbDinheiro.setEnabled(true);
+                rbDebito.setEnabled(true);
+                rbCredito.setEnabled(true);
+                txtCodigo.setEnabled(false);
+                cbNomeCliente.setEnabled(false);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -959,7 +973,7 @@ public class CadastroConsulta extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Os campos Quantidade e desconto não podem ser nulos e devem conter apenas numeros.");
             }
         } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Os campos Quantidade e desconto não podem ser nulos e devem conter apenas numeros.","Erro",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Os campos Quantidade e desconto não podem ser nulos e devem conter apenas numeros.", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
@@ -985,106 +999,123 @@ public class CadastroConsulta extends javax.swing.JFrame {
         List<Cliente> listaClientes = new ArrayList<Cliente>();
 
         listaClientes = clienteDao.listarCliente();
-        
+
         DefaultComboBoxModel model = new DefaultComboBoxModel(listaClientes.toArray());
         cbNomeCliente.setModel(model);
     }//GEN-LAST:event_cbNomeClienteAncestorAdded
 
     private void cbNomeClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cbNomeClienteKeyReleased
-   
+
     }//GEN-LAST:event_cbNomeClienteKeyReleased
 
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
-        
+
         try {
-            
+
             DefaultTableModel model = (DefaultTableModel) tblProdutos.getModel();
             int linha = tblProdutos.getSelectedRow();
             System.out.println(linha);
-            
+
             Double desconto = Double.parseDouble(tblProdutos.getValueAt(linha, 5).toString());
             Double precoTotal = Double.parseDouble(tblProdutos.getValueAt(linha, 6).toString());
-            
+
             model.removeRow(linha);
-            
+
             Double calcValor = (Double.parseDouble(txtValor.getText()) - (precoTotal) - (desconto));
             txtValor.setText(calcValor + "");
             Double calcDesconto = desconto - Double.parseDouble(txtValor.getText());
             txtDesconto.setText(Double.parseDouble(txtDesconto.getText()) - desconto + "");
             txtTotal.setText(somaValor() + "");
-            if(tblProdutos.getRowCount() == 0){
+            if (tblProdutos.getRowCount() == 0) {
                 txtValor.setText(null);
                 txtDesconto.setText(null);
                 txtTotal.setText(null);
             }
-            
-            if(tblProdutos.getRowCount() == 1 && tblProdutos.getValueAt(0, 5).toString().equals("0.0")){
+
+            if (tblProdutos.getRowCount() == 1 && tblProdutos.getValueAt(0, 5).toString().equals("0.0")) {
                 txtValor.setText(txtTotal.getText());
                 txtDesconto.setText("0.0");
             }
-            
-            
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro!" + "\n" + e, "Erro", JOptionPane.ERROR_MESSAGE);
         }
-        
+
     }//GEN-LAST:event_btnRemoverActionPerformed
 
     private void rbDinheiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbDinheiroActionPerformed
         // TODO add your handling code here:
-        if(rbDinheiro.isSelected()) {
+        float total = somaValor();
+        if (rbDinheiro.isSelected()) {
             rbDebito.setSelected(false);
             rbCredito.setSelected(false);
             txtAcrecimo.setText("0");
+            txtTotal.setText(total + "");
         }
     }//GEN-LAST:event_rbDinheiroActionPerformed
 
     private void rbDebitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbDebitoActionPerformed
         // TODO add your handling code here:
-        if(rbDebito.isSelected()) {
+        float total = somaValor();
+        if (rbDebito.isSelected()) {
             rbDinheiro.setSelected(false);
             rbCredito.setSelected(false);
             txtAcrecimo.setText("3");
+            if (!txtTotal.getText().isEmpty() || !txtTotal.getText().isBlank()) {
+                Double valorAcrecimo = total + (total * (Double.parseDouble(txtAcrecimo.getText()) / 100));
+                txtTotal.setText(String.valueOf(valorAcrecimo));
+
+            }
         }
     }//GEN-LAST:event_rbDebitoActionPerformed
 
     private void rbCreditoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbCreditoActionPerformed
         // TODO add your handling code here:
-        if(rbCredito.isSelected()) {
+        float total = somaValor();
+        if (rbCredito.isSelected()) {
             rbDinheiro.setSelected(false);
             rbDebito.setSelected(false);
             txtAcrecimo.setText("6");
+            if (!txtTotal.getText().isEmpty() || !txtTotal.getText().isBlank()) {
+                Double valorAcrecimo = total + (total * (Double.parseDouble(txtAcrecimo.getText()) / 100));
+                txtTotal.setText(String.valueOf(valorAcrecimo));
+            }
         }
     }//GEN-LAST:event_rbCreditoActionPerformed
 
-    
-    
+    private void txtTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTotalActionPerformed
+
+    private void txtNomeClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNomeClienteActionPerformed
+
     //Método que monta a Jtable adicionando produtos automaticamente com leitor de codigo de barras
-    private void pegarConteudo(java.awt.event.KeyEvent e){
-        
+    private void pegarConteudo(java.awt.event.KeyEvent e) {
+
         Double preco = Double.parseDouble(txtPreco.getText());
         Double quantidade = Double.parseDouble(txtQuantidade.getText());
         Double desconto = Double.valueOf(txtAplicarDesconto.getText());
-        Double descontoAplicado = (preco * quantidade) * (desconto/100);
+        Double descontoAplicado = (preco * quantidade) * (desconto / 100);
         DefaultTableModel model = (DefaultTableModel) tblProdutos.getModel();
-        if(e.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
-            item +=1;
+        if (e.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+            item += 1;
             model.addRow(new Object[]{
                 //item,
-                model.getRowCount()+1,
+                model.getRowCount() + 1,
                 txtCodigo.getText(),
                 txtProduto.getText(),
                 txtQuantidade.getText(),
                 txtPreco.getText(),
-                descontoAplicado,
-                //Double.parseDouble((txtPreco.getText())* Integer.parseInt(txtQuantidade.getText()) - descontoAplicado) + Double.parseDouble(txtAcrecimo.getText())
+                descontoAplicado, //Double.parseDouble((txtPreco.getText())* Integer.parseInt(txtQuantidade.getText()) - descontoAplicado) + Double.parseDouble(txtAcrecimo.getText())
             });
-            txtTotal.setText(somaValor()+"");
-            txtDesconto.setText(0-somaDesconto()+"");
-            txtValor.setText(somaValor()+(-somaDesconto())+"");
+            txtTotal.setText(somaValor() + "");
+            txtDesconto.setText(0 - somaDesconto() + "");
+            txtValor.setText(somaValor() + (-somaDesconto()) + "");
         }
     }
-    
+
     //metodo que monta a jtable quando o botao adicionar é pressionado
     private void pegarConteudoBtn() {
 
@@ -1102,20 +1133,17 @@ public class CadastroConsulta extends javax.swing.JFrame {
             txtProduto.getText(),
             txtQuantidade.getText(),
             txtPreco.getText(),
-            //0 - descontoAplicado,
             descontoAplicado,
             Float.parseFloat(txtPreco.getText()) * Float.parseFloat(txtQuantidade.getText()) - descontoAplicado
         });
         txtTotal.setText(somaValor() + "");
         txtDesconto.setText(somaDesconto() + "");
-        //txtDesconto.setText(0 - somaDesconto() + "");
-        //txtValor.setText(somaValor() + (-somaDesconto()) + "");
         txtValor.setText(somaValor() + (somaDesconto()) + "");
 
     }
-    
+
     //soma os valores da coluna valor do jtable
-    private float somaValor(){
+    private float somaValor() {
         float soma = 0, valor = 0;
         int cont = tblProdutos.getRowCount();
         for (int i = 0; i < cont; i++) {
@@ -1124,9 +1152,9 @@ public class CadastroConsulta extends javax.swing.JFrame {
         }
         return soma;
     }
-    
+
     //soma os valores dos descontos da coluna desconto do jtable
-    private float somaDesconto(){
+    private float somaDesconto() {
         float soma = 0, valor = 0;
         int cont = tblProdutos.getRowCount();
         for (int i = 0; i < cont; i++) {
@@ -1135,8 +1163,7 @@ public class CadastroConsulta extends javax.swing.JFrame {
         }
         return soma;
     }
-    
-    
+
     /**
      * @param args the command line arguments
      */
@@ -1172,7 +1199,7 @@ public class CadastroConsulta extends javax.swing.JFrame {
             }
         });
     }
-    
+
     private void excluirProduto() {
         String sql = "delete from produtos where codigo = ?";
         String sqlConsultaProduto = "select * from produtos where codigo = ?";
@@ -1275,16 +1302,14 @@ public class CadastroConsulta extends javax.swing.JFrame {
         txtDescricao.setText(null);
         lblFoto.setIcon(null);
     }
-    
-    
-    
+
     private void limpaTelaProdutoMantemCodigo() {
         txtProduto.setText(null);
         txtPreco.setText(null);
         txtDescricao.setText(null);
         lblFoto.setIcon(null);
     }
-    
+
     private void limpaTelaProdutoTabela() {
         txtProduto.setText(null);
         txtPreco.setText(null);
@@ -1299,9 +1324,13 @@ public class CadastroConsulta extends javax.swing.JFrame {
         txtAplicarDesconto.setText("0");
         txtQuantidade.setText(null);
         txtAcrecimo.setText("0");
+        rbDinheiro.setEnabled(false);
+        rbDebito.setEnabled(false);
+        rbCredito.setEnabled(false);
+        txtCodigo.setEnabled(true);
     }
-    
-    private void limpaTelaProdutoAdicionar(){
+
+    private void limpaTelaProdutoAdicionar() {
         txtProduto.setText(null);
         txtPreco.setText(null);
         txtCodigo.setText(null);
@@ -1335,7 +1364,7 @@ public class CadastroConsulta extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e, "Erro!", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     private void salvarCliente() {
 
         String sql = "insert into clientes (nome,endereco,cpf_cnpj,telefone,email) values (?,?,?,?,?)";
@@ -1358,7 +1387,7 @@ public class CadastroConsulta extends javax.swing.JFrame {
         }
 
     }
-    
+
     private void limpaTelaCliente() {
         txtNomeCliente.setText(null);
         txtCelular.setText(null);
@@ -1367,7 +1396,7 @@ public class CadastroConsulta extends javax.swing.JFrame {
         txtEndereco.setText(null);
         //txtIdCliente.setText(null);
     }
-    
+
     private void setCamposClientes() {
         int setar = tblClientes.getSelectedRow();
         //txtIdCliente.setText(tblClientes.getModel().getValueAt(setar, 0).toString());
@@ -1377,7 +1406,7 @@ public class CadastroConsulta extends javax.swing.JFrame {
         txtCelular.setText(tblClientes.getModel().getValueAt(setar, 3).toString());
         txtEmail.setText(tblClientes.getModel().getValueAt(setar, 4).toString());
     }
-    
+
     private void pesquisarClientes() {
         String sql = "select * from clientes where nome like ?";
         try {
@@ -1392,23 +1421,18 @@ public class CadastroConsulta extends javax.swing.JFrame {
         }
 
     }
-    
-    
+
     private void alterarCliente() {
 
-        //String sql = "update clientes set nome = ?, endereco = ?, cpf_cnpj = ?, telefone = ?, email = ? where id = ?";
         String sql = "update clientes set nome = ?, endereco = ?, telefone = ?, email = ? where cpf_cnpj = ?";
         try {
             pst = conexao.prepareStatement(sql);
             pst.setString(1, txtNomeCliente.getText());
             pst.setString(2, txtEndereco.getText());
-            //pst.setString(3, cpf.getText());
             pst.setString(3, txtCelular.getText());
             pst.setString(4, txtEmail.getText());
             pst.setString(5, txtCpf.getText());
-            //pst.setString(6, txtIdCliente.getText());
             int alteracao = pst.executeUpdate();
-            //System.out.println(alteracao);
 
             if (alteracao > 0) {
                 JOptionPane.showMessageDialog(null, "Alteração realizada com sucesso");
@@ -1422,8 +1446,8 @@ public class CadastroConsulta extends javax.swing.JFrame {
         }
 
     }
-    
-    private void excluirCliente() {
+
+    /*private void excluirCliente() {
         String sql = "delete from clientes where cpf_cnpj = ?";
         try {
             pst = conexao.prepareStatement(sql);
@@ -1433,13 +1457,13 @@ public class CadastroConsulta extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
-    }
-    
-    private void insertVendaProduto(String codigoProduto, String nomeProduto, Double quantidade, Double precoUnitario, Object desconto, Object precoTotal, String formaPagamento, Date data, String operador, String nomeCliente) {
+    }*/
+
+    /*private void insertVendaProduto(String codigoProduto, String nomeProduto, Double quantidade, Double precoUnitario, Object desconto, Object precoTotal, String formaPagamento, Date data, String operador, String nomeCliente) {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
         String sql = "insert into vendaProduto (nome_cliente,nome_produto,codigo_produto,preco_unitario,quantidade,desconto,total,operador,data_pedido,forma_pagamento) values (?,?,?,?,?,?,?,?,?,?)";
-        
-         try {
+
+        try {
             pst = conexao.prepareStatement(sql);
             pst.setString(1, nomeCliente);
             pst.setString(2, nomeProduto);
@@ -1461,14 +1485,14 @@ public class CadastroConsulta extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e, "Erro!", JOptionPane.ERROR_MESSAGE);
         }
-        
-    }
-    
+
+    }*/
+
     //exporta nome do formulario de login para usar nessa tela
-    void exportarNome(Cliente cliente){
+    void exportarNome(Cliente cliente) {
         lblOperador.setText(cliente.getNome());
     }
-    
+
     private void limpaTelaETabela() {
         txtProduto.setText(null);
         txtPreco.setText(null);
@@ -1479,7 +1503,7 @@ public class CadastroConsulta extends javax.swing.JFrame {
         txtDesconto.setText(null);
         txtTotal.setText(null);
     }
-    
+
     //JLabel lblFoto = new JLabel("Foto");
     Connection conexao = null;
     PreparedStatement pst = null;
@@ -1489,8 +1513,7 @@ public class CadastroConsulta extends javax.swing.JFrame {
     int item = 0;
     int controle = 0;
     String usuario = System.getProperty("user.name");
- 
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;
@@ -1568,8 +1591,5 @@ public class CadastroConsulta extends javax.swing.JFrame {
     private javax.swing.JTextField txtTotal;
     private javax.swing.JTextField txtValor;
     // End of variables declaration//GEN-END:variables
-
-    
-
 
 }

@@ -24,7 +24,7 @@ public class ClienteDAO {
    
     public List listarCliente() {
         conexao = ConnectionFactory.conector();
-        String sql = "select * from clientes order by nome ASC";
+        String sql = "select * from clientes where ativo = true order by nome ASC";
         List<Cliente> listaClientes = new ArrayList<Cliente>();
         try {
             pst = conexao.prepareStatement(sql);
@@ -59,6 +59,19 @@ public class ClienteDAO {
             JOptionPane.showMessageDialog(null, e);
         }
         return listaClientes;
+    }
+    
+    public void excluirCliente(String cnpjCpf) {
+        conexao = ConnectionFactory.conector();
+        String sql = "delete from clientes where cpf_cnpj = ?";
+        try {
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1, cnpjCpf);
+            boolean alteracao = pst.execute();
+            JOptionPane.showMessageDialog(null, "O Cliente com CNPJ/CPF " + cnpjCpf + " foi excluído", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
     }
     
 }
