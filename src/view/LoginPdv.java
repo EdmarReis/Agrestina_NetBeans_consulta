@@ -15,12 +15,12 @@ import utils.ConnectionFactory;
  *
  * @author edmar_sr
  */
-public class LoginConsulta extends javax.swing.JFrame {
+public class LoginPdv extends javax.swing.JFrame {
 
     /**
      * Creates new form Login
      */
-    public LoginConsulta() {
+    public LoginPdv() {
         initComponents();
         setLocationRelativeTo(null);
 	conexao = ConnectionFactory.conector();
@@ -121,21 +121,23 @@ public class LoginConsulta extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LoginConsulta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginPdv.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LoginConsulta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginPdv.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LoginConsulta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginPdv.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LoginConsulta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginPdv.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LoginConsulta().setVisible(true);
+                new LoginPdv().setVisible(true);
             }
         });
     }
@@ -158,19 +160,19 @@ public class LoginConsulta extends javax.swing.JFrame {
 			rs = pst.executeQuery();
 			
 			if(rs.next()) {
-				CadastroConsulta principal = new CadastroConsulta();
+				TelaPdv principal = new TelaPdv();
 				principal.setVisible(true);
 				principal.setResizable(false);
 				principal.setLocationRelativeTo(null); 
                                 Cliente cliente = new Cliente();
                                 cliente.setNome(txtUsuario.getText());
                                 principal.exportarNome(cliente);
-                                Logger.getLogger(CadastroConsulta.class.getName()).log(Level.WARNING, "Usuário "+txtUsuario.getText()+" logado", "");
+                                Logger.getLogger(TelaPdv.class.getName()).log(Level.WARNING, "Usuário "+txtUsuario.getText()+" logado", "");
                                 this.dispose();
 				conexao.close();
 			}else {
 				JOptionPane.showMessageDialog(null, "Usuário e/ou senha inválido(s)");
-                                Logger.getLogger(CadastroConsulta.class.getName()).log(Level.SEVERE, "Tentativa de login, usuario "+txtUsuario.getText(), "");
+                                Logger.getLogger(TelaPdv.class.getName()).log(Level.SEVERE, "Tentativa de login, usuario "+txtUsuario.getText(), "");
 			}
 
 		} catch (Exception e) {

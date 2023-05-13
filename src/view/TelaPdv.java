@@ -31,12 +31,12 @@ import utils.ConnectionFactory;
  *
  * @author edmar_sr
  */
-public class CadastroConsulta extends javax.swing.JFrame {
+public class TelaPdv extends javax.swing.JFrame {
 
     /**
      * Creates new form Cadastro
      */
-    public CadastroConsulta() {
+    public TelaPdv() {
         initComponents();
         lblCaixa.setText(usuario);
         conexao = ConnectionFactory.conector();
@@ -66,22 +66,6 @@ public class CadastroConsulta extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         tab = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tblClientes = new javax.swing.JTable();
-        lblNome = new javax.swing.JLabel();
-        lblCelular = new javax.swing.JLabel();
-        lblEmail = new javax.swing.JLabel();
-        lblEndereco = new javax.swing.JLabel();
-        lblCpf = new javax.swing.JLabel();
-        txtNomeCliente = new javax.swing.JTextField();
-        txtCelular = new javax.swing.JTextField();
-        txtEmail = new javax.swing.JTextField();
-        txtEndereco = new javax.swing.JTextField();
-        txtCpf = new javax.swing.JTextField();
-        btnLimparCLiente = new javax.swing.JButton();
-        btnSalvarCliente = new javax.swing.JButton();
-        btnAlterarCliente = new javax.swing.JButton();
-        btnExcluirCliente = new javax.swing.JButton();
         btnPesquisarCliente = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -107,6 +91,8 @@ public class CadastroConsulta extends javax.swing.JFrame {
         lblDescricao = new javax.swing.JLabel();
         lblUnidade1 = new javax.swing.JLabel();
         cbNomeCliente = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        txtEstoque = new javax.swing.JTextField();
         jPanel9 = new javax.swing.JPanel();
         btnLimparProduto = new javax.swing.JButton();
         txtQuantidade = new javax.swing.JTextField();
@@ -143,73 +129,6 @@ public class CadastroConsulta extends javax.swing.JFrame {
             }
         });
 
-        tblClientes.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        tblClientes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblClientesMouseClicked(evt);
-            }
-        });
-        jScrollPane2.setViewportView(tblClientes);
-
-        lblNome.setText("Nome");
-
-        lblCelular.setText("Celular");
-
-        lblEmail.setText("Email");
-
-        lblEndereco.setText("Endereço");
-
-        lblCpf.setText("CPF/CNPJ");
-
-        txtNomeCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNomeClienteActionPerformed(evt);
-            }
-        });
-        txtNomeCliente.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtNomeClienteKeyReleased(evt);
-            }
-        });
-
-        btnLimparCLiente.setText("Limpar");
-        btnLimparCLiente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLimparCLienteActionPerformed(evt);
-            }
-        });
-
-        btnSalvarCliente.setText("Salvar");
-        btnSalvarCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalvarClienteActionPerformed(evt);
-            }
-        });
-
-        btnAlterarCliente.setText("Editar");
-        btnAlterarCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAlterarClienteActionPerformed(evt);
-            }
-        });
-
-        btnExcluirCliente.setText("Excluir");
-        btnExcluirCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExcluirClienteActionPerformed(evt);
-            }
-        });
-
         btnPesquisarCliente.setText("Pesquisar");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -217,73 +136,16 @@ public class CadastroConsulta extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(btnLimparCLiente)
-                        .addGap(53, 53, 53)
-                        .addComponent(btnSalvarCliente)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 557, Short.MAX_VALUE)
-                        .addComponent(btnAlterarCliente)
-                        .addGap(54, 54, 54)
-                        .addComponent(btnExcluirCliente)
-                        .addGap(47, 47, 47)
-                        .addComponent(btnPesquisarCliente)
-                        .addGap(24, 24, 24))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblNome)
-                                    .addComponent(lblCelular)
-                                    .addComponent(lblEmail)
-                                    .addComponent(lblEndereco)
-                                    .addComponent(lblCpf))
-                                .addGap(35, 35, 35)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1004, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(1022, Short.MAX_VALUE)
+                .addComponent(btnPesquisarCliente)
+                .addGap(24, 24, 24))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNome)
-                    .addComponent(txtNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCelular)
-                    .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblEmail)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblEndereco)
-                    .addComponent(txtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCpf)
-                    .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 172, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnLimparCLiente)
-                    .addComponent(btnSalvarCliente)
-                    .addComponent(btnAlterarCliente)
-                    .addComponent(btnExcluirCliente)
-                    .addComponent(btnPesquisarCliente))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(376, Short.MAX_VALUE)
+                .addComponent(btnPesquisarCliente)
+                .addGap(154, 154, 154))
         );
 
         tab.addTab("Clientes", jPanel3);
@@ -442,6 +304,10 @@ public class CadastroConsulta extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setText("Estoque");
+
+        txtEstoque.setEditable(false);
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -449,10 +315,6 @@ public class CadastroConsulta extends javax.swing.JFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(lblPreco)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addComponent(lblUnidade)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -466,14 +328,23 @@ public class CadastroConsulta extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txtProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(lblDescricao)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
                         .addComponent(lblUnidade1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cbNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cbNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblDescricao)
+                            .addComponent(lblPreco))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addComponent(txtPreco)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
@@ -498,7 +369,9 @@ public class CadastroConsulta extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPreco)
-                    .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDescricao)
@@ -800,67 +673,6 @@ public class CadastroConsulta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 
-    private void btnLimparCLienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparCLienteActionPerformed
-        // TODO add your handling code here:
-        limpaTelaCliente();
-    }//GEN-LAST:event_btnLimparCLienteActionPerformed
-
-    private void btnSalvarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarClienteActionPerformed
-        // TODO add your handling code here:
-        if (txtNomeCliente.getText().equals("") || txtCelular.getText().equals("(  )      -    ") || txtEmail.getText().equals("") || txtEndereco.getText().equals("") || txtCpf.getText().equals("   .   .   -  ")) {
-            JOptionPane.showMessageDialog(null, "Existem campos vazios");
-        } else {
-            salvarCliente();
-            limpaTelaCliente();
-        }
-    }//GEN-LAST:event_btnSalvarClienteActionPerformed
-
-    private void btnAlterarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarClienteActionPerformed
-        // TODO add your handling code here:
-        int question = JOptionPane.showConfirmDialog(null, "Deseja Salvar as alterações?", "Atenção", JOptionPane.YES_NO_OPTION);
-        if (txtNomeCliente.getText().equals("") || txtEndereco.getText().equals("") || txtCelular.getText().equals("") || txtCpf.getText().equals("") || txtEmail.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Preencha todos os campos");
-        } else {
-            if (question == JOptionPane.YES_OPTION) {
-                alterarCliente();
-                limpaTelaCliente();
-            } else {
-                JOptionPane.showMessageDialog(null, "Nenhuma alteração foi realizada.", "Aviso", JOptionPane.WARNING_MESSAGE);
-            }
-        }
-    }//GEN-LAST:event_btnAlterarClienteActionPerformed
-
-    private void btnExcluirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirClienteActionPerformed
-        // TODO add your handling code here:
-        int question = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir o registro?", "Atenção", JOptionPane.YES_NO_OPTION);
-        if (txtNomeCliente.getText().equals("") || txtEndereco.getText().equals("") || txtCpf.getText().equals("") || txtCelular.getText().equals("") || txtEmail.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Exclusão não efetuada, verifique os campos");
-            limpaTelaCliente();
-        } else {
-            if (question == JOptionPane.YES_OPTION) {
-                //excluirCliente();
-                ClienteDAO clienteDao = new ClienteDAO();
-                clienteDao.excluirCliente(txtCpf.getText());
-                limpaTelaCliente();
-                pesquisarClientes();
-
-            } else {
-                JOptionPane.showMessageDialog(null, "Nenhuma alteração foi realizada.", "Aviso", JOptionPane.WARNING_MESSAGE);
-            }
-
-        }
-    }//GEN-LAST:event_btnExcluirClienteActionPerformed
-
-    private void txtNomeClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomeClienteKeyReleased
-        // TODO add your handling code here:
-        pesquisarClientes();
-    }//GEN-LAST:event_txtNomeClienteKeyReleased
-
-    private void tblClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblClientesMouseClicked
-        // TODO add your handling code here:
-        setCamposClientes();
-    }//GEN-LAST:event_tblClientesMouseClicked
-
     //executa na abertura da tela
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
@@ -960,24 +772,58 @@ public class CadastroConsulta extends javax.swing.JFrame {
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
+            String codigoProduto;
+            Double quantidade;
+        
+            for (int i = 0; i < tblProdutos.getRowCount(); i++) {
+                codigoProduto = (String) tblProdutos.getValueAt(i, 1);
+                quantidade = Double.parseDouble((String) tblProdutos.getValueAt(i, 3));
+            
+                vendaProdutoDao.acertoEstoqueBtnLimpar(codigoProduto, quantidade);
+            }
+        
+            limpaTelaProdutoTabela(); 
         }
     }//GEN-LAST:event_btnFinalizarActionPerformed
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
         // TODO add your handling code here:
         try {
-            if (!txtAplicarDesconto.getText().equals(null) || !txtQuantidade.getText().equals(null)) {
-                pegarConteudoBtn();
-                limpaTelaProdutoAdicionar();
-            } else {
-                JOptionPane.showMessageDialog(null, "Os campos Quantidade e desconto não podem ser nulos e devem conter apenas numeros.");
+            VendaProdutoDAO vendaProdutoDao = new VendaProdutoDAO();
+            double subtraiEstoque = 0 - Double.parseDouble(txtQuantidade.getText());
+            String codigoProduto = txtCodigo.getText();
+            double quantidade = Double.parseDouble(txtQuantidade.getText());
+            double porcentagem = Double.parseDouble(txtAplicarDesconto.getText());
+            try {
+                if (!txtAplicarDesconto.getText().equals(null) && !txtQuantidade.getText().equals(null) && quantidade > 0 && porcentagem >= 0) {
+                    boolean estoqueOk = vendaProdutoDao.acertoEstoqueBtnAdicionar(codigoProduto, subtraiEstoque, quantidade);
+                    if (estoqueOk) {
+                        pegarConteudoBtn();
+                        limpaTelaProdutoAdicionar();
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Erro nas validações, verifique:\n \n -Valores negativos\n -Caracteres inválidos nos campos\n -Campos vazios", "Erro", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Erro nas validações, verifique:\n \n -Valores negativos\n -Caracteres inválidos nos campos\n -Campos vazios \n \n"+e, "Erro", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Os campos Quantidade e desconto não podem ser nulos e devem conter apenas numeros.", "Erro", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Erro nas validações, verifique:\n \n -Valores negativos\n -Caracteres inválidos nos campos\n -Campos vazios \n \n"+e, "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void btnLimparProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparProdutoActionPerformed
+        VendaProdutoDAO vendaProdutoDao = new VendaProdutoDAO();
+        String codigoProduto;
+        Double quantidade;
+        
+        for (int i = 0; i < tblProdutos.getRowCount(); i++) {
+            codigoProduto = (String) tblProdutos.getValueAt(i, 1);
+            quantidade = Double.parseDouble((String) tblProdutos.getValueAt(i, 3));
+            
+            vendaProdutoDao.acertoEstoqueBtnLimpar(codigoProduto, quantidade);
+        }
+        
         limpaTelaProdutoTabela();
     }//GEN-LAST:event_btnLimparProdutoActionPerformed
 
@@ -1015,6 +861,13 @@ public class CadastroConsulta extends javax.swing.JFrame {
             DefaultTableModel model = (DefaultTableModel) tblProdutos.getModel();
             int linha = tblProdutos.getSelectedRow();
             System.out.println(linha);
+            
+            VendaProdutoDAO vendaProdutoDao = new VendaProdutoDAO();
+            String codigoProduto;
+            Double quantidade;
+            codigoProduto = (String) tblProdutos.getValueAt(linha, 1);
+            quantidade = Double.parseDouble((String) tblProdutos.getValueAt(linha, 3));
+            vendaProdutoDao.acertoEstoqueBtnLimpar(codigoProduto, quantidade);
 
             Double desconto = Double.parseDouble(tblProdutos.getValueAt(linha, 5).toString());
             Double precoTotal = Double.parseDouble(tblProdutos.getValueAt(linha, 6).toString());
@@ -1086,10 +939,6 @@ public class CadastroConsulta extends javax.swing.JFrame {
     private void txtTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTotalActionPerformed
-
-    private void txtNomeClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeClienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNomeClienteActionPerformed
 
     //Método que monta a Jtable adicionando produtos automaticamente com leitor de codigo de barras
     private void pegarConteudo(java.awt.event.KeyEvent e) {
@@ -1181,21 +1030,23 @@ public class CadastroConsulta extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadastroConsulta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaPdv.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadastroConsulta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaPdv.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadastroConsulta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaPdv.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadastroConsulta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaPdv.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CadastroConsulta().setVisible(true);
+                new TelaPdv().setVisible(true);
             }
         });
     }
@@ -1262,6 +1113,7 @@ public class CadastroConsulta extends javax.swing.JFrame {
                 txtPreco.setText(rs.getString("preco"));
                 txtDescricao.setText(rs.getString("descricao"));
                 cbUnidade.setSelectedItem(rs.getString("unidade"));
+                txtEstoque.setText(rs.getString("estoque"));
 
                 ImageIcon imageIcon = new ImageIcon(new ImageIcon(rs.getString("foto")).getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT));
                 lblFoto.setIcon(imageIcon);
@@ -1301,6 +1153,7 @@ public class CadastroConsulta extends javax.swing.JFrame {
         txtCodigo.setText(null);
         txtDescricao.setText(null);
         lblFoto.setIcon(null);
+        txtEstoque.setText(null);
     }
 
     private void limpaTelaProdutoMantemCodigo() {
@@ -1308,6 +1161,7 @@ public class CadastroConsulta extends javax.swing.JFrame {
         txtPreco.setText(null);
         txtDescricao.setText(null);
         lblFoto.setIcon(null);
+        txtEstoque.setText(null);
     }
 
     private void limpaTelaProdutoTabela() {
@@ -1316,6 +1170,7 @@ public class CadastroConsulta extends javax.swing.JFrame {
         txtCodigo.setText(null);
         txtDescricao.setText(null);
         lblFoto.setIcon(null);
+        txtEstoque.setText(null);
         DefaultTableModel model = (DefaultTableModel) tblProdutos.getModel();
         model.setRowCount(0);
         txtValor.setText(null);
@@ -1339,6 +1194,7 @@ public class CadastroConsulta extends javax.swing.JFrame {
         txtAplicarDesconto.setText("0");
         txtQuantidade.setText(null);
         txtAcrecimo.setText("0");
+        txtEstoque.setText(null);
     }
 
     private void salvarProduto() {
@@ -1364,100 +1220,6 @@ public class CadastroConsulta extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e, "Erro!", JOptionPane.ERROR_MESSAGE);
         }
     }
-
-    private void salvarCliente() {
-
-        String sql = "insert into clientes (nome,endereco,cpf_cnpj,telefone,email) values (?,?,?,?,?)";
-        try {
-            pst = conexao.prepareStatement(sql);
-            pst.setString(1, txtNomeCliente.getText());
-            pst.setString(2, txtEndereco.getText());
-            pst.setString(3, txtCpf.getText());
-            pst.setString(4, txtCelular.getText());
-            pst.setString(5, txtEmail.getText());
-            pst.execute();
-
-            JOptionPane.showMessageDialog(null, "Cliente incluído com sucesso");
-
-        } catch (SQLIntegrityConstraintViolationException e) {
-            // TODO: handle exception
-            JOptionPane.showMessageDialog(null, "Não é possível inserir o mesmo CPF/CNPJ duas vezes." + "\n" + e, "Erro!", JOptionPane.ERROR_MESSAGE);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e, "Erro!", JOptionPane.ERROR_MESSAGE);
-        }
-
-    }
-
-    private void limpaTelaCliente() {
-        txtNomeCliente.setText(null);
-        txtCelular.setText(null);
-        txtCpf.setText(null);
-        txtEmail.setText(null);
-        txtEndereco.setText(null);
-        //txtIdCliente.setText(null);
-    }
-
-    private void setCamposClientes() {
-        int setar = tblClientes.getSelectedRow();
-        //txtIdCliente.setText(tblClientes.getModel().getValueAt(setar, 0).toString());
-        txtNomeCliente.setText(tblClientes.getModel().getValueAt(setar, 0).toString());
-        txtEndereco.setText(tblClientes.getModel().getValueAt(setar, 1).toString());
-        txtCpf.setText(tblClientes.getModel().getValueAt(setar, 2).toString());
-        txtCelular.setText(tblClientes.getModel().getValueAt(setar, 3).toString());
-        txtEmail.setText(tblClientes.getModel().getValueAt(setar, 4).toString());
-    }
-
-    private void pesquisarClientes() {
-        String sql = "select * from clientes where nome like ?";
-        try {
-            pst = conexao.prepareStatement(sql);
-            pst.setString(1, txtNomeCliente.getText() + "%");
-            rs = pst.executeQuery();
-
-            tblClientes.setModel(DbUtils.resultSetToTableModel(rs));
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-
-    }
-
-    private void alterarCliente() {
-
-        String sql = "update clientes set nome = ?, endereco = ?, telefone = ?, email = ? where cpf_cnpj = ?";
-        try {
-            pst = conexao.prepareStatement(sql);
-            pst.setString(1, txtNomeCliente.getText());
-            pst.setString(2, txtEndereco.getText());
-            pst.setString(3, txtCelular.getText());
-            pst.setString(4, txtEmail.getText());
-            pst.setString(5, txtCpf.getText());
-            int alteracao = pst.executeUpdate();
-
-            if (alteracao > 0) {
-                JOptionPane.showMessageDialog(null, "Alteração realizada com sucesso");
-                pesquisarClientes();
-            } else {
-                JOptionPane.showMessageDialog(null, "Nenhuma alteração foi realizada.", "Aviso", JOptionPane.WARNING_MESSAGE);
-            }
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-
-    }
-
-    /*private void excluirCliente() {
-        String sql = "delete from clientes where cpf_cnpj = ?";
-        try {
-            pst = conexao.prepareStatement(sql);
-            pst.setString(1, txtCpf.getText());
-            boolean alteracao = pst.execute();
-            JOptionPane.showMessageDialog(null, "O Cliente com CNPJ/CPF " + txtCpf.getText() + " foi excluído", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-    }*/
 
     /*private void insertVendaProduto(String codigoProduto, String nomeProduto, Double quantidade, Double precoUnitario, Object desconto, Object precoTotal, String formaPagamento, Date data, String operador, String nomeCliente) {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -1502,6 +1264,9 @@ public class CadastroConsulta extends javax.swing.JFrame {
         txtValor.setText(null);
         txtDesconto.setText(null);
         txtTotal.setText(null);
+        txtEstoque.setText(null);
+        DefaultTableModel model = (DefaultTableModel) tblProdutos.getModel();
+        model.setRowCount(0);
     }
 
     //JLabel lblFoto = new JLabel("Foto");
@@ -1517,14 +1282,10 @@ public class CadastroConsulta extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;
-    private javax.swing.JButton btnAlterarCliente;
-    private javax.swing.JButton btnExcluirCliente;
     private javax.swing.JButton btnFinalizar;
-    private javax.swing.JButton btnLimparCLiente;
     private javax.swing.JButton btnLimparProduto;
     private javax.swing.JButton btnPesquisarCliente;
     private javax.swing.JButton btnRemover;
-    private javax.swing.JButton btnSalvarCliente;
     private javax.swing.ButtonGroup btngFormaDePagamento;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JComboBox<String> cbNomeCliente;
@@ -1534,6 +1295,7 @@ public class CadastroConsulta extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -1552,17 +1314,11 @@ public class CadastroConsulta extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblCaixa;
-    private javax.swing.JLabel lblCelular;
     private javax.swing.JLabel lblCodigo;
-    private javax.swing.JLabel lblCpf;
     private javax.swing.JLabel lblDescricao;
-    private javax.swing.JLabel lblEmail;
-    private javax.swing.JLabel lblEndereco;
     private javax.swing.JLabel lblFoto;
-    private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblOperador;
     private javax.swing.JLabel lblPreco;
     private javax.swing.JLabel lblProduto;
@@ -1572,19 +1328,14 @@ public class CadastroConsulta extends javax.swing.JFrame {
     private javax.swing.JRadioButton rbDebito;
     private javax.swing.JRadioButton rbDinheiro;
     private javax.swing.JTabbedPane tab;
-    private javax.swing.JTable tblClientes;
     private javax.swing.JTable tblProdutos;
     private javax.swing.JTextField txtAcrecimo;
     private javax.swing.JTextField txtAplicarDesconto;
-    private javax.swing.JTextField txtCelular;
     private javax.swing.JTextField txtCodigo;
-    private javax.swing.JTextField txtCpf;
     private javax.swing.JTextField txtDesconto;
     private javax.swing.JTextField txtDescricao;
-    private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtEndereco;
+    private javax.swing.JTextField txtEstoque;
     private javax.swing.JTextField txtHora;
-    private javax.swing.JTextField txtNomeCliente;
     private javax.swing.JTextField txtPreco;
     private javax.swing.JTextField txtProduto;
     private javax.swing.JTextField txtQuantidade;

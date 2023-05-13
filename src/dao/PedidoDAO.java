@@ -15,7 +15,7 @@ import model.Cliente;
 import model.Pedido;
 import model.Produto;
 import utils.ConnectionFactory;
-import view.CadastroConsulta;
+import view.TelaPdv;
 
 /**
  *
@@ -47,7 +47,7 @@ public class PedidoDAO {
     public void insertPedido(Cliente nomeCliente, Produto precoTotal) {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
         conexao = ConnectionFactory.conector();
-        CadastroConsulta cad = new CadastroConsulta();
+        TelaPdv cad = new TelaPdv();
         
         String sql = "insert into pedido (nome_cliente, total) values (?,?)";
         

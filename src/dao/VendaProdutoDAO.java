@@ -8,6 +8,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Cliente;
 import model.Produto;
@@ -54,6 +56,86 @@ public class VendaProdutoDAO {
             JOptionPane.showMessageDialog(null, e, "Erro!", JOptionPane.ERROR_MESSAGE);
         }
         
+    }
+
+    public void acertoEstoqueBtnLimpar(String codigoProduto, Double quantidade) {
+
+        conexao = ConnectionFactory.conector();
+        String sql = "update produtos set estoque = ? where codigo = ?";
+        String estoqueAtual = pesquisaEstoque(Double.parseDouble(codigoProduto));
+        Double atualizado = Double.parseDouble(estoqueAtual) + quantidade;
+
+        try {
+            pst = conexao.prepareStatement(sql);
+            pst.setDouble(1, atualizado);
+            pst.setString(2, codigoProduto);
+            int result = pst.executeUpdate();
+
+            //if (result == 1) {
+            //    JOptionPane.showMessageDialog(null, "Estoque atualizado ");
+            //}
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e, "Erro ao atualizar o estoque!", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
+    
+    public boolean acertoEstoqueBtnAdicionar(String codigoProduto, Double subtraiEstoque, double quantidade) {
+
+        conexao = ConnectionFactory.conector();
+        String sql = "update produtos set estoque = ? where codigo = ?";
+        String estoqueAtual = pesquisaEstoque(Double.parseDouble(codigoProduto));
+        Double verificaMenorQueZero = Double.parseDouble(estoqueAtual) - quantidade;
+        Double atualizado = Double.parseDouble(estoqueAtual) + subtraiEstoque;
+
+        if (verificaMenorQueZero < 0) {
+            JOptionPane.showMessageDialog(null, "Quantidade informada maior do que estoque disponivel");
+            return false;
+        } else {
+            try {
+                pst = conexao.prepareStatement(sql);
+                pst.setDouble(1, atualizado);
+                pst.setString(2, codigoProduto);
+                int result = pst.executeUpdate();
+
+                //if (result == 1) {
+                //    JOptionPane.showMessageDialog(null, "Estoque atualizado ");
+                //}
+                return true;
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e, "Erro ao atualizar o estoque!", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        }
+    }
+    
+    public String pesquisaEstoque(double codigo) {
+        conexao = ConnectionFactory.conector();
+        String sql = "select estoque from produtos where codigo = ?";
+        //double estoque = 0;
+        String estoque = "";
+        try {
+            
+            pst = conexao.prepareStatement(sql);
+            pst.setDouble(1, codigo);
+            rs = pst.executeQuery();
+            
+            if (rs.next()) {
+                //estoque = rs.getDouble("estoque");
+                estoque = rs.getString("estoque");
+            }//else{
+            //    JOptionPane.showMessageDialog(null, "Código " + codigo + " não encontrado.", "Erro", JOptionPane.ERROR_MESSAGE);
+            //    estoque = "";
+            //}
+            
+        } catch (Exception e) {
+            Logger.getLogger(VendaProdutoDAO.class.getName()).log(Level.INFO, "(VendaProdutoDAO)Erro ao pesquisar estoque!", "");
+            JOptionPane.showMessageDialog(null, e, "(VendaProdutoDAO)Erro ao pesquisar o estoque!!!", JOptionPane.ERROR_MESSAGE);   
+        } 
+        
+        //return Double.toString(estoque);
+        return estoque;
     }
     
 }
