@@ -44,17 +44,19 @@ public class PedidoDAO {
         return numero;
     } 
     
-    public void insertPedido(Cliente nomeCliente, Produto precoTotal) {
+    public void insertPedido(Cliente nomeCliente, Produto precoTotal, String data, String operador) {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
         conexao = ConnectionFactory.conector();
         TelaPdv cad = new TelaPdv();
         
-        String sql = "insert into pedido (nome_cliente, total) values (?,?)";
+        String sql = "insert into pedido (nome_cliente, total_pedido, data_pedido, operador) values (?,?,?,?)";
         
          try {
             pst = conexao.prepareStatement(sql);
             pst.setString(1, nomeCliente.getNome());
             pst.setObject(2, precoTotal.getPrecoTotal());
+            pst.setString(3, data);
+            pst.setString(4, operador);
             pst.execute();
             
             String numeroPedido = String.valueOf(numeroPedido());

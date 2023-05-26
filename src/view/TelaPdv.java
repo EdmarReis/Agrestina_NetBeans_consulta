@@ -169,6 +169,8 @@ public class TelaPdv extends javax.swing.JFrame {
 
         tab.addTab("Futuro", jPanel4);
 
+        jScrollPane3.setEnabled(false);
+
         tblProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -758,7 +760,7 @@ public class TelaPdv extends javax.swing.JFrame {
 
                     nomeToCliente.setNome(nomeCliente);
                     precoToProduto.setPrecoTotal(campoTotal);
-                    pedidoDao.insertPedido(nomeToCliente, precoToProduto);
+                    pedidoDao.insertPedido(nomeToCliente, precoToProduto, anoCompleto, operador);
                     System.out.println(nomeToCliente.getNome());
                     System.out.println(precoToProduto.getPrecoTotal());
                     limpaTelaETabela();
