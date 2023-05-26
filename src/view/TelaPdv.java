@@ -699,90 +699,107 @@ public class TelaPdv extends javax.swing.JFrame {
 
     private void btnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarActionPerformed
         // TODO add your handling code here:
-        //JOptionPane.showOptionDialog(rootPane, evt, usuario, controle, HEIGHT, icon, options, table)
-        PedidoDAO pedidoDao = new PedidoDAO();
-        Cliente nomeToCliente = new Cliente();
-        Produto precoToProduto = new Produto();
-        VendaProdutoDAO vendaProdutoDao = new VendaProdutoDAO();
-        try {
-            if (tblProdutos.getRowCount() > 0 && (rbCredito.isSelected() || rbDebito.isSelected() || rbDinheiro.isSelected())) {
-                String nomeCliente = cbNomeCliente.getSelectedItem().toString();
-                String nomeProduto;
+        int question = JOptionPane.showConfirmDialog(null, "Deseja finalizar o pedido do cliente " + cbNomeCliente.getSelectedItem() + "?", "Atenção", JOptionPane.YES_NO_OPTION);
+        if (question == JOptionPane.YES_OPTION) {
+
+            PedidoDAO pedidoDao = new PedidoDAO();
+            Cliente nomeToCliente = new Cliente();
+            Produto precoToProduto = new Produto();
+            VendaProdutoDAO vendaProdutoDao = new VendaProdutoDAO();
+            try {
+                if (tblProdutos.getRowCount() > 0 && (rbCredito.isSelected() || rbDebito.isSelected() || rbDinheiro.isSelected())) {
+                    String nomeCliente = cbNomeCliente.getSelectedItem().toString();
+                    String nomeProduto;
+                    String codigoProduto;
+                    Double precoUnitario;
+                    Double quantidade;
+                    Object desconto;
+                    Object precoTotal = 0;
+                    String operador = lblOperador.getText();
+
+                    Date dataCompleta;
+                    SimpleDateFormat sdfDia = new SimpleDateFormat("yyyy-MM-dd");
+                    Calendar c = Calendar.getInstance();
+                    java.util.Date diaCompleto = c.getTime();
+                    String anoCompleto = sdfDia.format(diaCompleto).toString();
+
+                    String formaPagamento = null;
+
+                    if (rbCredito.isSelected()) {
+                        formaPagamento = "Crédito";
+                        txtAcrecimo.setText("0");
+                    }
+                    if (rbDebito.isSelected()) {
+                        formaPagamento = "Débito";
+                        txtAcrecimo.setText("3");
+                    }
+                    if (rbDinheiro.isSelected()) {
+                        formaPagamento = "Dinheiro";
+                        txtAcrecimo.setText("6");
+                    }
+
+                    System.out.println(anoCompleto);
+                    System.out.println(formaPagamento);
+
+                    for (int i = 0; i < tblProdutos.getRowCount(); i++) {
+                        codigoProduto = (String) tblProdutos.getValueAt(i, 1);
+                        nomeProduto = (String) tblProdutos.getValueAt(i, 2);
+                        quantidade = Double.parseDouble((String) tblProdutos.getValueAt(i, 3));
+                        precoUnitario = Double.parseDouble((String) tblProdutos.getValueAt(i, 4));
+                        desconto = tblProdutos.getValueAt(i, 5);
+                        precoTotal = tblProdutos.getValueAt(i, 6);
+
+                        //insertVendaProduto(codigoProduto, nomeProduto, quantidade, precoUnitario, desconto, precoTotal, formaPagamento, data, operador, nomeCliente);
+                        vendaProdutoDao.insertVendaProduto(codigoProduto, nomeProduto, quantidade, precoUnitario, desconto, precoTotal, formaPagamento, anoCompleto, operador, nomeCliente);
+
+                    }
+
+                    Double campoTotal = Double.parseDouble(txtTotal.getText() + txtAcrecimo.getText());
+
+                    nomeToCliente.setNome(nomeCliente);
+                    precoToProduto.setPrecoTotal(campoTotal);
+                    pedidoDao.insertPedido(nomeToCliente, precoToProduto);
+                    System.out.println(nomeToCliente.getNome());
+                    System.out.println(precoToProduto.getPrecoTotal());
+                    limpaTelaETabela();
+                    cbNomeCliente.setEnabled(true);
+                    btnAdicionar.setEnabled(true);
+                    btnRemover.setEnabled(true);
+                    btngFormaDePagamento.clearSelection();
+                System.out.println("Venda finalizada com sucesso");
+                } else if (tblProdutos.getRowCount() == 0) {
+                    JOptionPane.showMessageDialog(null, "Verifique se ha itens adicionados.", "Erro", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Selecione a forma de pagamento e clique em finalizar novamente.", "Atenção", JOptionPane.INFORMATION_MESSAGE);
+                    rbDinheiro.setEnabled(true);
+                    rbDebito.setEnabled(true);
+                    rbCredito.setEnabled(true);
+                    txtCodigo.setEnabled(false);
+                    cbNomeCliente.setEnabled(false);
+                    btnAdicionar.setEnabled(false);
+                    btnRemover.setEnabled(false);
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
                 String codigoProduto;
-                Double precoUnitario;
                 Double quantidade;
-                Object desconto;
-                Object precoTotal = 0;
-                String operador = lblOperador.getText();
-
-                Date dataCompleta;
-                SimpleDateFormat sdfDia = new SimpleDateFormat("yyyy-MM-dd");
-                Calendar c = Calendar.getInstance();
-                java.util.Date diaCompleto = c.getTime();
-                String anoCompleto = sdfDia.format(diaCompleto).toString();
-
-                String formaPagamento = null;
-
-                if (rbCredito.isSelected()) {
-                    formaPagamento = "Crédito";
-                    txtAcrecimo.setText("0");
-                }
-                if (rbDebito.isSelected()) {
-                    formaPagamento = "Débito";
-                    txtAcrecimo.setText("3");
-                }
-                if (rbDinheiro.isSelected()) {
-                    formaPagamento = "Dinheiro";
-                    txtAcrecimo.setText("6");
-                }
-
-                System.out.println(anoCompleto);
-                System.out.println(formaPagamento);
 
                 for (int i = 0; i < tblProdutos.getRowCount(); i++) {
                     codigoProduto = (String) tblProdutos.getValueAt(i, 1);
-                    nomeProduto = (String) tblProdutos.getValueAt(i, 2);
                     quantidade = Double.parseDouble((String) tblProdutos.getValueAt(i, 3));
-                    precoUnitario = Double.parseDouble((String) tblProdutos.getValueAt(i, 4));
-                    desconto = tblProdutos.getValueAt(i, 5);
-                    precoTotal = tblProdutos.getValueAt(i, 6);
 
-                    //insertVendaProduto(codigoProduto, nomeProduto, quantidade, precoUnitario, desconto, precoTotal, formaPagamento, data, operador, nomeCliente);
-                    vendaProdutoDao.insertVendaProduto(codigoProduto, nomeProduto, quantidade, precoUnitario, desconto, precoTotal, formaPagamento, anoCompleto, operador, nomeCliente);
-
+                    vendaProdutoDao.acertoEstoqueBtnLimpar(codigoProduto, quantidade);
                 }
 
-                Double campoTotal = Double.parseDouble(txtTotal.getText() + txtAcrecimo.getText());
+                limpaTelaProdutoTabela();
+                cbNomeCliente.setEnabled(true);
+                btnAdicionar.setEnabled(true);
+                btnRemover.setEnabled(true);
+                
+            }
 
-                nomeToCliente.setNome(nomeCliente);
-                precoToProduto.setPrecoTotal(campoTotal);
-                pedidoDao.insertPedido(nomeToCliente, precoToProduto);
-                System.out.println(nomeToCliente.getNome());
-                System.out.println(precoToProduto.getPrecoTotal());
-                limpaTelaETabela();
-            }else if (tblProdutos.getRowCount() == 0) {
-                JOptionPane.showMessageDialog(null, "Verifique se ha itens adicionados.", "Erro", JOptionPane.ERROR_MESSAGE);
-            }else {
-                JOptionPane.showMessageDialog(null, "Selecione a forma de pagamento", "Atenção", JOptionPane.INFORMATION_MESSAGE);
-                rbDinheiro.setEnabled(true);
-                rbDebito.setEnabled(true);
-                rbCredito.setEnabled(true);
-                txtCodigo.setEnabled(false);
-                cbNomeCliente.setEnabled(false);
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-            String codigoProduto;
-            Double quantidade;
-        
-            for (int i = 0; i < tblProdutos.getRowCount(); i++) {
-                codigoProduto = (String) tblProdutos.getValueAt(i, 1);
-                quantidade = Double.parseDouble((String) tblProdutos.getValueAt(i, 3));
-            
-                vendaProdutoDao.acertoEstoqueBtnLimpar(codigoProduto, quantidade);
-            }
-        
-            limpaTelaProdutoTabela(); 
+        } else {
+            JOptionPane.showMessageDialog(null, "Venda nao finalizada, continue adicionando produtos ou finalize a venda.", "Aviso", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnFinalizarActionPerformed
 
@@ -1179,10 +1196,15 @@ public class TelaPdv extends javax.swing.JFrame {
         txtAplicarDesconto.setText("0");
         txtQuantidade.setText(null);
         txtAcrecimo.setText("0");
+        btngFormaDePagamento.clearSelection();
         rbDinheiro.setEnabled(false);
         rbDebito.setEnabled(false);
         rbCredito.setEnabled(false);
         txtCodigo.setEnabled(true);
+        cbNomeCliente.setEnabled(true);
+        btnAdicionar.setEnabled(true);
+        btnRemover.setEnabled(true);
+        
     }
 
     private void limpaTelaProdutoAdicionar() {

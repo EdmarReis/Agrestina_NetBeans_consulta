@@ -47,7 +47,7 @@ public class VendaProdutoDAO {
             pst.setString(11, formaPagamento);
             pst.execute();
 
-            JOptionPane.showMessageDialog(null, "Item incluído com sucesso.");
+            //JOptionPane.showMessageDialog(null, "Item incluído com sucesso.");
 
         } catch (SQLIntegrityConstraintViolationException e) {
             // TODO: handle exception
