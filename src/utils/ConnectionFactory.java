@@ -15,14 +15,15 @@ public class ConnectionFactory {
     
     protected Connection conexao;
 	
-	public static Connection conector(){
+	
+        public static Connection conector(int TYPE_SCROLL_INSENSITIVE, int CONCUR_READ_ONLY){
 		
 		java.sql.Connection conexao = null;
 		
 		String driver = "com.mysql.jdbc.Driver";
 		String url = "jdbc:mysql://localhost:3306/agrestina";
 		String usu = "root";
-		String pass = "1996testE";
+		String pass = "";
 		
 		try {
 			Class.forName(driver);

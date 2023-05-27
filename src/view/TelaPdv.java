@@ -5,6 +5,7 @@
 package view;
 
 import dao.ClienteDAO;
+import dao.ImprimirDAO;
 import dao.PedidoDAO;
 import dao.VendaProdutoDAO;
 import java.awt.Image;
@@ -39,7 +40,7 @@ public class TelaPdv extends javax.swing.JFrame {
     public TelaPdv() {
         initComponents();
         lblCaixa.setText(usuario);
-        conexao = ConnectionFactory.conector();
+        //conexao = ConnectionFactory.conector();
         setLocationRelativeTo(null);
         try {
             MaskFormatter mascaraCpf = new MaskFormatter("###.###.###-##");
@@ -168,8 +169,6 @@ public class TelaPdv extends javax.swing.JFrame {
         );
 
         tab.addTab("Futuro", jPanel4);
-
-        jScrollPane3.setEnabled(false);
 
         tblProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -604,9 +603,11 @@ public class TelaPdv extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 11, Short.MAX_VALUE)
+                        .addGap(0, 17, Short.MAX_VALUE)
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(41, 41, 41))
+                        .addGap(41, 41, 41)
+                        .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -621,10 +622,8 @@ public class TelaPdv extends javax.swing.JFrame {
                                     .addComponent(lblFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE)))
-                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         tab.addTab("Produtos", jPanel2);
@@ -683,6 +682,7 @@ public class TelaPdv extends javax.swing.JFrame {
 
     }//GEN-LAST:event_formWindowOpened
 
+    
     //pesquisa o produto adicionado na linha codigo e joga informacoes na jtable
     private void txtCodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyReleased
         // TODO add your handling code here:
@@ -690,7 +690,7 @@ public class TelaPdv extends javax.swing.JFrame {
         //pegarConteudo(evt);
 
     }//GEN-LAST:event_txtCodigoKeyReleased
-
+    
     private void txtCodigoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyPressed
 
     }//GEN-LAST:event_txtCodigoKeyPressed
@@ -768,7 +768,8 @@ public class TelaPdv extends javax.swing.JFrame {
                     btnAdicionar.setEnabled(true);
                     btnRemover.setEnabled(true);
                     btngFormaDePagamento.clearSelection();
-                System.out.println("Venda finalizada com sucesso");
+                    System.out.println("Venda finalizada com sucesso");
+                    
                 } else if (tblProdutos.getRowCount() == 0) {
                     JOptionPane.showMessageDialog(null, "Verifique se ha itens adicionados.", "Erro", JOptionPane.ERROR_MESSAGE);
                 } else {
@@ -1120,13 +1121,14 @@ public class TelaPdv extends javax.swing.JFrame {
 
     //metodo para preencher automaticamente a jtable com like do que for digitado no campo produto - funciona junto com o evento de key do campo produto
     private void pesquisarProduto() {
+        conexao = ConnectionFactory.conector(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         String sql = "select * from produtos where codigo = ?";
         try {
             pst = conexao.prepareStatement(sql);
             pst.setString(1, txtCodigo.getText());
             rs = pst.executeQuery();
 
-            if (rs.first()) {
+            if (rs.next()) {
                 //JOptionPane.showMessageDialog(null, "Entrou aqui");
                 txtProduto.setText(rs.getString("nome"));
                 txtPreco.setText(rs.getString("preco"));

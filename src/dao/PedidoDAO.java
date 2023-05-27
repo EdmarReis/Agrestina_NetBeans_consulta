@@ -28,7 +28,7 @@ public class PedidoDAO {
     ResultSet rs = null;
    
     public int numeroPedido() {
-        conexao = ConnectionFactory.conector();
+        conexao = ConnectionFactory.conector(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         String sql = "select * from pedido order by id desc limit 1";
         int numero = 0;
         try {
@@ -46,8 +46,9 @@ public class PedidoDAO {
     
     public void insertPedido(Cliente nomeCliente, Produto precoTotal, String data, String operador) {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-        conexao = ConnectionFactory.conector();
+        conexao = ConnectionFactory.conector(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         TelaPdv cad = new TelaPdv();
+        ImprimirDAO imprimir = new ImprimirDAO();
         
         String sql = "insert into pedido (nome_cliente, total_pedido, data_pedido, operador) values (?,?,?,?)";
         
@@ -62,6 +63,8 @@ public class PedidoDAO {
             String numeroPedido = String.valueOf(numeroPedido());
 
             JOptionPane.showMessageDialog(null, "Pedido número "+numeroPedido+" incluído com sucesso");
+            
+            imprimir.imprime(numeroPedido);
 
         } catch (SQLIntegrityConstraintViolationException e) {
             // TODO: handle exception

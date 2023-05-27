@@ -23,7 +23,7 @@ public class ClienteDAO {
     ResultSet rs = null;
    
     public List listarCliente() {
-        conexao = ConnectionFactory.conector();
+        conexao = ConnectionFactory.conector(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         String sql = "select * from clientes where ativo = true order by nome ASC";
         List<Cliente> listaClientes = new ArrayList<Cliente>();
         try {
@@ -42,7 +42,7 @@ public class ClienteDAO {
     }
     
     public List listarClientePeloNome(String nome) {
-        conexao = ConnectionFactory.conector();
+        conexao = ConnectionFactory.conector(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         String sql = "select * from clientes where nome like ?";
         List<Cliente> listaClientes = new ArrayList<Cliente>();
         try {
@@ -62,7 +62,7 @@ public class ClienteDAO {
     }
     
     public void excluirCliente(String cnpjCpf) {
-        conexao = ConnectionFactory.conector();
+        conexao = ConnectionFactory.conector(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         String sql = "delete from clientes where cpf_cnpj = ?";
         try {
             pst = conexao.prepareStatement(sql);

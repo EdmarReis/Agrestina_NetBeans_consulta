@@ -23,7 +23,7 @@ public class LoginPdv extends javax.swing.JFrame {
     public LoginPdv() {
         initComponents();
         setLocationRelativeTo(null);
-	conexao = ConnectionFactory.conector();
+	conexao = ConnectionFactory.conector(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 	System.out.println(conexao);
     }
     

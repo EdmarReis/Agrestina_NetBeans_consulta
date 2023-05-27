@@ -27,7 +27,7 @@ public class VendaProdutoDAO {
     
     public void insertVendaProduto(String codigoProduto, String nomeProduto, Double quantidade, Double precoUnitario, Object desconto, Object precoTotal, String formaPagamento, String data, String operador, String nomeCliente) {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-        conexao = ConnectionFactory.conector();
+        conexao = ConnectionFactory.conector(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         String sql = "insert into vendaProduto (id_pedido,nome_cliente,nome_produto,codigo_produto,preco_unitario,quantidade,desconto,total,operador,data_pedido,forma_pagamento) values (?,?,?,?,?,?,?,?,?,?,?)";
         PedidoDAO numeroPedido = new PedidoDAO();
         int idPedido = numeroPedido.numeroPedido();
@@ -60,7 +60,7 @@ public class VendaProdutoDAO {
 
     public void acertoEstoqueBtnLimpar(String codigoProduto, Double quantidade) {
 
-        conexao = ConnectionFactory.conector();
+        conexao = ConnectionFactory.conector(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         String sql = "update produtos set estoque = ? where codigo = ?";
         String estoqueAtual = pesquisaEstoque(Double.parseDouble(codigoProduto));
         Double atualizado = Double.parseDouble(estoqueAtual) + quantidade;
@@ -82,7 +82,7 @@ public class VendaProdutoDAO {
     
     public boolean acertoEstoqueBtnAdicionar(String codigoProduto, Double subtraiEstoque, double quantidade) {
 
-        conexao = ConnectionFactory.conector();
+        conexao = ConnectionFactory.conector(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         String sql = "update produtos set estoque = ? where codigo = ?";
         String estoqueAtual = pesquisaEstoque(Double.parseDouble(codigoProduto));
         Double verificaMenorQueZero = Double.parseDouble(estoqueAtual) - quantidade;
@@ -111,7 +111,7 @@ public class VendaProdutoDAO {
     }
     
     public String pesquisaEstoque(double codigo) {
-        conexao = ConnectionFactory.conector();
+        conexao = ConnectionFactory.conector(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         String sql = "select estoque from produtos where codigo = ?";
         //double estoque = 0;
         String estoque = "";
