@@ -59,6 +59,11 @@ public class MenuInicial extends javax.swing.JFrame {
 
         btnCadCliente.setIcon(new javax.swing.ImageIcon("C:\\Users\\Camila\\Downloads\\Imagens software\\aplicação\\clientes.png")); // NOI18N
         btnCadCliente.setText("Cliente");
+        btnCadCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadClienteActionPerformed(evt);
+            }
+        });
 
         btnCadUsuario.setIcon(new javax.swing.ImageIcon("C:\\Users\\Camila\\Downloads\\Imagens software\\aplicação\\adicionar-usuario (1).png")); // NOI18N
         btnCadUsuario.setText("Usuário");
@@ -231,6 +236,10 @@ public class MenuInicial extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCadClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCadClienteActionPerformed
 
     /**
      * @param args the command line arguments

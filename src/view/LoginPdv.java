@@ -9,6 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Cliente;
+import model.Estoque;
 import utils.ConnectionFactory;
 
 /**
@@ -160,13 +161,17 @@ public class LoginPdv extends javax.swing.JFrame {
 			rs = pst.executeQuery();
 			
 			if(rs.next()) {
-				TelaPdv principal = new TelaPdv();
-				principal.setVisible(true);
-				principal.setResizable(false);
-				principal.setLocationRelativeTo(null); 
                                 Cliente cliente = new Cliente();
                                 cliente.setNome(txtUsuario.getText());
+				TelaPdv principal = new TelaPdv();
+                                Cadastro cadastro = new Cadastro();
+                                Estoque estoque = new Estoque();
+                                
+				principal.setVisible(true);
+				principal.setResizable(false);
+				principal.setLocationRelativeTo(null);                                
                                 principal.exportarNome(cliente);
+                                
                                 Logger.getLogger(TelaPdv.class.getName()).log(Level.WARNING, "Usuário "+txtUsuario.getText()+" logado", "");
                                 this.dispose();
 				conexao.close();
