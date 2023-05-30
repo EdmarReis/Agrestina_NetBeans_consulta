@@ -66,10 +66,6 @@ public class TelaPdv extends javax.swing.JFrame {
         buttonGroup2 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         tab = new javax.swing.JTabbedPane();
-        jPanel3 = new javax.swing.JPanel();
-        btnPesquisarCliente = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblProdutos = new javax.swing.JTable();
@@ -105,6 +101,7 @@ public class TelaPdv extends javax.swing.JFrame {
         btnFinalizar = new javax.swing.JButton();
         txtAcrecimo = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
+        btnSair = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -120,55 +117,14 @@ public class TelaPdv extends javax.swing.JFrame {
         txtDesconto = new javax.swing.JTextField();
         txtValor = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setTitle("Modulo PDV");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
         });
-
-        btnPesquisarCliente.setText("Pesquisar");
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(1022, Short.MAX_VALUE)
-                .addComponent(btnPesquisarCliente)
-                .addGap(24, 24, 24))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(376, Short.MAX_VALUE)
-                .addComponent(btnPesquisarCliente)
-                .addGap(154, 154, 154))
-        );
-
-        tab.addTab("Clientes", jPanel3);
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1122, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 541, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        tab.addTab("Futuro", jPanel4);
 
         tblProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -419,6 +375,13 @@ public class TelaPdv extends javax.swing.JFrame {
 
         jLabel5.setText("% Acrécimo");
 
+        btnSair.setText("Sair");
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
@@ -448,7 +411,9 @@ public class TelaPdv extends javax.swing.JFrame {
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnFinalizar)
-                .addContainerGap(148, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnSair, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -466,7 +431,8 @@ public class TelaPdv extends javax.swing.JFrame {
                     .addComponent(btnAdicionar)
                     .addComponent(btnRemover)
                     .addComponent(btnFinalizar)
-                    .addComponent(txtAcrecimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtAcrecimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSair))
                 .addContainerGap())
         );
 
@@ -593,9 +559,10 @@ public class TelaPdv extends javax.swing.JFrame {
                         .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(27, 27, 27)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 968, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 968, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(111, 111, 111)
+                        .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -603,11 +570,9 @@ public class TelaPdv extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 17, Short.MAX_VALUE)
+                        .addGap(0, 28, Short.MAX_VALUE)
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(41, 41, 41)
-                        .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26))
+                        .addGap(49, 49, 49))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -621,12 +586,14 @@ public class TelaPdv extends javax.swing.JFrame {
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
-        tab.addTab("Produtos", jPanel2);
+        tab.addTab("PDV", jPanel2);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -644,12 +611,6 @@ public class TelaPdv extends javax.swing.JFrame {
                 .addComponent(tab)
                 .addContainerGap())
         );
-
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
 
@@ -682,22 +643,9 @@ public class TelaPdv extends javax.swing.JFrame {
 
     }//GEN-LAST:event_formWindowOpened
 
-    
-    //pesquisa o produto adicionado na linha codigo e joga informacoes na jtable
-    private void txtCodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyReleased
+    private void txtTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalActionPerformed
         // TODO add your handling code here:
-        pesquisarProduto();
-        //pegarConteudo(evt);
-
-    }//GEN-LAST:event_txtCodigoKeyReleased
-    
-    private void txtCodigoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyPressed
-
-    }//GEN-LAST:event_txtCodigoKeyPressed
-
-    private void txtProdutoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProdutoKeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtProdutoKeyReleased
+    }//GEN-LAST:event_txtTotalActionPerformed
 
     private void btnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarActionPerformed
         // TODO add your handling code here:
@@ -769,7 +717,7 @@ public class TelaPdv extends javax.swing.JFrame {
                     btnRemover.setEnabled(true);
                     btngFormaDePagamento.clearSelection();
                     System.out.println("Venda finalizada com sucesso");
-                    
+
                 } else if (tblProdutos.getRowCount() == 0) {
                     JOptionPane.showMessageDialog(null, "Verifique se ha itens adicionados.", "Erro", JOptionPane.ERROR_MESSAGE);
                 } else {
@@ -798,81 +746,13 @@ public class TelaPdv extends javax.swing.JFrame {
                 cbNomeCliente.setEnabled(true);
                 btnAdicionar.setEnabled(true);
                 btnRemover.setEnabled(true);
-                
+
             }
 
         } else {
             JOptionPane.showMessageDialog(null, "Venda nao finalizada, continue adicionando produtos ou finalize a venda.", "Aviso", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnFinalizarActionPerformed
-
-    private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
-        // TODO add your handling code here:
-        try {
-            VendaProdutoDAO vendaProdutoDao = new VendaProdutoDAO();
-            double subtraiEstoque = 0 - Double.parseDouble(txtQuantidade.getText());
-            String codigoProduto = txtCodigo.getText();
-            double quantidade = Double.parseDouble(txtQuantidade.getText());
-            double porcentagem = Double.parseDouble(txtAplicarDesconto.getText());
-            try {
-                if (!txtAplicarDesconto.getText().equals(null) && !txtQuantidade.getText().equals(null) && quantidade > 0 && porcentagem >= 0) {
-                    boolean estoqueOk = vendaProdutoDao.acertoEstoqueBtnAdicionar(codigoProduto, subtraiEstoque, quantidade);
-                    if (estoqueOk) {
-                        pegarConteudoBtn();
-                        limpaTelaProdutoAdicionar();
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(null, "Erro nas validações, verifique:\n \n -Valores negativos\n -Caracteres inválidos nos campos\n -Campos vazios", "Erro", JOptionPane.ERROR_MESSAGE);
-                }
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Erro nas validações, verifique:\n \n -Valores negativos\n -Caracteres inválidos nos campos\n -Campos vazios \n \n"+e, "Erro", JOptionPane.ERROR_MESSAGE);
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro nas validações, verifique:\n \n -Valores negativos\n -Caracteres inválidos nos campos\n -Campos vazios \n \n"+e, "Erro", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_btnAdicionarActionPerformed
-
-    private void btnLimparProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparProdutoActionPerformed
-        VendaProdutoDAO vendaProdutoDao = new VendaProdutoDAO();
-        String codigoProduto;
-        Double quantidade;
-        
-        for (int i = 0; i < tblProdutos.getRowCount(); i++) {
-            codigoProduto = (String) tblProdutos.getValueAt(i, 1);
-            quantidade = Double.parseDouble((String) tblProdutos.getValueAt(i, 3));
-            
-            vendaProdutoDao.acertoEstoqueBtnLimpar(codigoProduto, quantidade);
-        }
-        
-        limpaTelaProdutoTabela();
-    }//GEN-LAST:event_btnLimparProdutoActionPerformed
-
-    private void tblProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProdutosMouseClicked
-        // TODO add your handling code here:
-        //setCamposProdutos();
-    }//GEN-LAST:event_tblProdutosMouseClicked
-
-    private void cbUnidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbUnidadeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbUnidadeActionPerformed
-
-    private void cbNomeClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNomeClienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbNomeClienteActionPerformed
-
-    private void cbNomeClienteAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_cbNomeClienteAncestorAdded
-        ClienteDAO clienteDao = new ClienteDAO();
-        List<Cliente> listaClientes = new ArrayList<Cliente>();
-
-        listaClientes = clienteDao.listarCliente();
-
-        DefaultComboBoxModel model = new DefaultComboBoxModel(listaClientes.toArray());
-        cbNomeCliente.setModel(model);
-    }//GEN-LAST:event_cbNomeClienteAncestorAdded
-
-    private void cbNomeClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cbNomeClienteKeyReleased
-
-    }//GEN-LAST:event_cbNomeClienteKeyReleased
 
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
 
@@ -881,7 +761,7 @@ public class TelaPdv extends javax.swing.JFrame {
             DefaultTableModel model = (DefaultTableModel) tblProdutos.getModel();
             int linha = tblProdutos.getSelectedRow();
             System.out.println(linha);
-            
+
             VendaProdutoDAO vendaProdutoDao = new VendaProdutoDAO();
             String codigoProduto;
             Double quantidade;
@@ -913,19 +793,96 @@ public class TelaPdv extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro!" + "\n" + e, "Erro", JOptionPane.ERROR_MESSAGE);
         }
-
     }//GEN-LAST:event_btnRemoverActionPerformed
 
-    private void rbDinheiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbDinheiroActionPerformed
+    private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
+        // TODO add your handling code here:
+        try {
+            VendaProdutoDAO vendaProdutoDao = new VendaProdutoDAO();
+            double subtraiEstoque = 0 - Double.parseDouble(txtQuantidade.getText());
+            String codigoProduto = txtCodigo.getText();
+            double quantidade = Double.parseDouble(txtQuantidade.getText());
+            double porcentagem = Double.parseDouble(txtAplicarDesconto.getText());
+            try {
+                if (!txtAplicarDesconto.getText().equals(null) && !txtQuantidade.getText().equals(null) && quantidade > 0 && porcentagem >= 0) {
+                    boolean estoqueOk = vendaProdutoDao.acertoEstoqueBtnAdicionar(codigoProduto, subtraiEstoque, quantidade);
+                    if (estoqueOk) {
+                        pegarConteudoBtn();
+                        limpaTelaProdutoAdicionar();
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Erro nas validações, verifique:\n \n -Valores negativos\n -Caracteres inválidos nos campos\n -Campos vazios", "Erro", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Erro nas validações, verifique:\n \n -Valores negativos\n -Caracteres inválidos nos campos\n -Campos vazios \n \n"+e, "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro nas validações, verifique:\n \n -Valores negativos\n -Caracteres inválidos nos campos\n -Campos vazios \n \n"+e, "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnAdicionarActionPerformed
+
+    private void btnLimparProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparProdutoActionPerformed
+        VendaProdutoDAO vendaProdutoDao = new VendaProdutoDAO();
+        String codigoProduto;
+        Double quantidade;
+
+        for (int i = 0; i < tblProdutos.getRowCount(); i++) {
+            codigoProduto = (String) tblProdutos.getValueAt(i, 1);
+            quantidade = Double.parseDouble((String) tblProdutos.getValueAt(i, 3));
+
+            vendaProdutoDao.acertoEstoqueBtnLimpar(codigoProduto, quantidade);
+        }
+
+        limpaTelaProdutoTabela();
+    }//GEN-LAST:event_btnLimparProdutoActionPerformed
+
+    private void cbNomeClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cbNomeClienteKeyReleased
+
+    }//GEN-LAST:event_cbNomeClienteKeyReleased
+
+    private void cbNomeClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNomeClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbNomeClienteActionPerformed
+
+    private void cbNomeClienteAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_cbNomeClienteAncestorAdded
+        ClienteDAO clienteDao = new ClienteDAO();
+        List<Cliente> listaClientes = new ArrayList<Cliente>();
+
+        listaClientes = clienteDao.listarCliente();
+
+        DefaultComboBoxModel model = new DefaultComboBoxModel(listaClientes.toArray());
+        cbNomeCliente.setModel(model);
+    }//GEN-LAST:event_cbNomeClienteAncestorAdded
+
+    private void cbUnidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbUnidadeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbUnidadeActionPerformed
+
+    private void txtCodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyReleased
+
+    }//GEN-LAST:event_txtCodigoKeyReleased
+
+    private void txtCodigoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyPressed
+
+    }//GEN-LAST:event_txtCodigoKeyPressed
+
+    private void txtProdutoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProdutoKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtProdutoKeyReleased
+
+    private void rbCreditoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbCreditoActionPerformed
         // TODO add your handling code here:
         float total = somaValor();
-        if (rbDinheiro.isSelected()) {
+        if (rbCredito.isSelected()) {
+            rbDinheiro.setSelected(false);
             rbDebito.setSelected(false);
-            rbCredito.setSelected(false);
-            txtAcrecimo.setText("0");
-            txtTotal.setText(total + "");
+            txtAcrecimo.setText("6");
+            if (!txtTotal.getText().isEmpty() || !txtTotal.getText().isBlank()) {
+                Double valorAcrecimo = total + (total * (Double.parseDouble(txtAcrecimo.getText()) / 100));
+                txtTotal.setText(String.valueOf(valorAcrecimo));
+            }
         }
-    }//GEN-LAST:event_rbDinheiroActionPerformed
+    }//GEN-LAST:event_rbCreditoActionPerformed
 
     private void rbDebitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbDebitoActionPerformed
         // TODO add your handling code here:
@@ -942,24 +899,32 @@ public class TelaPdv extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_rbDebitoActionPerformed
 
-    private void rbCreditoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbCreditoActionPerformed
+    private void rbDinheiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbDinheiroActionPerformed
         // TODO add your handling code here:
         float total = somaValor();
-        if (rbCredito.isSelected()) {
-            rbDinheiro.setSelected(false);
+        if (rbDinheiro.isSelected()) {
             rbDebito.setSelected(false);
-            txtAcrecimo.setText("6");
-            if (!txtTotal.getText().isEmpty() || !txtTotal.getText().isBlank()) {
-                Double valorAcrecimo = total + (total * (Double.parseDouble(txtAcrecimo.getText()) / 100));
-                txtTotal.setText(String.valueOf(valorAcrecimo));
-            }
+            rbCredito.setSelected(false);
+            txtAcrecimo.setText("0");
+            txtTotal.setText(total + "");
         }
-    }//GEN-LAST:event_rbCreditoActionPerformed
+    }//GEN-LAST:event_rbDinheiroActionPerformed
 
-    private void txtTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalActionPerformed
+    private void tblProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProdutosMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtTotalActionPerformed
+        //setCamposProdutos();
+    }//GEN-LAST:event_tblProdutosMouseClicked
 
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+        // TODO add your handling code here:
+        int question = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja Sair?", "Sair", JOptionPane.YES_NO_OPTION);
+        if (question == JOptionPane.YES_OPTION) {
+            this.dispose();
+        }
+    }//GEN-LAST:event_btnSairActionPerformed
+
+    
+   
     //Método que monta a Jtable adicionando produtos automaticamente com leitor de codigo de barras
     private void pegarConteudo(java.awt.event.KeyEvent e) {
 
@@ -1310,8 +1275,8 @@ public class TelaPdv extends javax.swing.JFrame {
     private javax.swing.JButton btnAdicionar;
     private javax.swing.JButton btnFinalizar;
     private javax.swing.JButton btnLimparProduto;
-    private javax.swing.JButton btnPesquisarCliente;
     private javax.swing.JButton btnRemover;
+    private javax.swing.JButton btnSair;
     private javax.swing.ButtonGroup btngFormaDePagamento;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JComboBox<String> cbNomeCliente;
@@ -1327,19 +1292,14 @@ public class TelaPdv extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLlabel2;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblCaixa;
     private javax.swing.JLabel lblCodigo;

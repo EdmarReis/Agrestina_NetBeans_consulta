@@ -81,7 +81,7 @@ public class CadastroProdutos extends javax.swing.JFrame {
         btnLimparProduto = new javax.swing.JButton();
         btnSalvarProduto = new javax.swing.JButton();
         btnAlterarProduto = new javax.swing.JButton();
-        btnPesquisarProduto = new javax.swing.JButton();
+        btnSair = new javax.swing.JButton();
         btnFindFoto = new javax.swing.JButton();
         lblFoto = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -94,7 +94,9 @@ public class CadastroProdutos extends javax.swing.JFrame {
         lblOperadorPro = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Modulo de Produtos");
+        setResizable(false);
 
         tblProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -139,7 +141,7 @@ public class CadastroProdutos extends javax.swing.JFrame {
             }
         });
 
-        btnSalvarProduto.setText("Salvar");
+        btnSalvarProduto.setText("Incluir");
         btnSalvarProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalvarProdutoActionPerformed(evt);
@@ -153,7 +155,12 @@ public class CadastroProdutos extends javax.swing.JFrame {
             }
         });
 
-        btnPesquisarProduto.setText("Pesquisar");
+        btnSair.setText("Sair");
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairActionPerformed(evt);
+            }
+        });
 
         btnFindFoto.setText("Buscar foto");
         btnFindFoto.addActionListener(new java.awt.event.ActionListener() {
@@ -245,11 +252,11 @@ public class CadastroProdutos extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(lblOperadorPro))
                                     .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(btnPesquisarProduto)
+                                        .addComponent(btnSair)
                                         .addGap(39, 39, 39)
                                         .addComponent(btnFindFoto)))
-                                .addGap(0, 16, Short.MAX_VALUE)))
-                        .addGap(0, 32, Short.MAX_VALUE)))
+                                .addGap(0, 20, Short.MAX_VALUE)))
+                        .addGap(0, 36, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -303,7 +310,7 @@ public class CadastroProdutos extends javax.swing.JFrame {
                     .addComponent(btnLimparProduto)
                     .addComponent(btnSalvarProduto)
                     .addComponent(btnAlterarProduto)
-                    .addComponent(btnPesquisarProduto)
+                    .addComponent(btnSair)
                     .addComponent(btnFindFoto))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -447,6 +454,11 @@ public class CadastroProdutos extends javax.swing.JFrame {
 	principal.setResizable(false);
 	principal.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnAcertoDeEstoqueActionPerformed
+
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnSairActionPerformed
 
     /**
      * @param args the command line arguments
@@ -755,7 +767,7 @@ public class CadastroProdutos extends javax.swing.JFrame {
     private javax.swing.JButton btnAlterarProduto;
     private javax.swing.JButton btnFindFoto;
     private javax.swing.JButton btnLimparProduto;
-    private javax.swing.JButton btnPesquisarProduto;
+    private javax.swing.JButton btnSair;
     private javax.swing.JButton btnSalvarProduto;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;

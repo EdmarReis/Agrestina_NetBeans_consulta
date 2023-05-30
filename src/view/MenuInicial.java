@@ -50,6 +50,8 @@ public class MenuInicial extends javax.swing.JFrame {
         btnEntradasPorPeriodo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Menu Principal");
+        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Zilla Slab Medium", 3, 18)); // NOI18N
         jLabel1.setText("Financeiro");
@@ -70,6 +72,11 @@ public class MenuInicial extends javax.swing.JFrame {
 
         btnCadFornecedor.setIcon(new javax.swing.ImageIcon("C:\\Users\\Camila\\Downloads\\Imagens software\\aplicação\\fornecedor (1).png")); // NOI18N
         btnCadFornecedor.setText("Fornecedor");
+        btnCadFornecedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadFornecedorActionPerformed(evt);
+            }
+        });
 
         btnCadProduto.setIcon(new javax.swing.ImageIcon("C:\\Users\\Camila\\Downloads\\Imagens software\\aplicação\\produtos (1).png")); // NOI18N
         btnCadProduto.setText("Produto");
@@ -270,6 +277,11 @@ public class MenuInicial extends javax.swing.JFrame {
     private void btnDevolucaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDevolucaoActionPerformed
         logar(4);
     }//GEN-LAST:event_btnDevolucaoActionPerformed
+
+    private void btnCadFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadFornecedorActionPerformed
+        // TODO add your handling code here:
+        logar(5);
+    }//GEN-LAST:event_btnCadFornecedorActionPerformed
 
     /**
      * @param args the command line arguments

@@ -54,6 +54,7 @@ public class EstoqueTela extends javax.swing.JFrame {
         txtProdutoEstoque = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Modulo de estoque");
 
         jLabel1.setText("Módulo de Estoque");
 
