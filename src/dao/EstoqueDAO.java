@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Cliente;
 import utils.ConnectionFactory;
-import view.Cadastro;
+import view.CadastroProdutos;
 import view.EstoqueTela;
 
 /**

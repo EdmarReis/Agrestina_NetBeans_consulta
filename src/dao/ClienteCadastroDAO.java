@@ -11,7 +11,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
 import utils.ConnectionFactory;
-import view.Cadastro;
+import view.CadastroProdutos;
 
 /**
  *

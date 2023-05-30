@@ -53,20 +53,25 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-              <Component id="btnPdv" min="-2" pref="183" max="-2" attributes="0"/>
-              <Component id="btnOrcamento" min="-2" pref="183" max="-2" attributes="0"/>
-              <Component id="btnContasPagar" min="-2" pref="183" max="-2" attributes="0"/>
-              <Component id="btnContasReceber" min="-2" pref="183" max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-              <Component id="btnDevolucao" min="-2" max="-2" attributes="0"/>
-              <Component id="btnConfiguracoes" min="-2" pref="183" max="-2" attributes="0"/>
-              <Component id="btnCadProduto" min="-2" pref="183" max="-2" attributes="0"/>
-              <Component id="btnCadFornecedor" min="-2" pref="183" max="-2" attributes="0"/>
-              <Component id="btnCadUsuario" min="-2" pref="183" max="-2" attributes="0"/>
-              <Component id="btnCadCliente" min="-2" pref="183" max="-2" attributes="0"/>
-              <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+              <Component id="btnDevolucao" alignment="0" max="32767" attributes="0"/>
+              <Group type="102" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnPdv" min="-2" pref="183" max="-2" attributes="0"/>
+                      <Component id="btnOrcamento" min="-2" pref="183" max="-2" attributes="0"/>
+                      <Component id="btnContasPagar" min="-2" pref="183" max="-2" attributes="0"/>
+                      <Component id="btnContasReceber" min="-2" pref="183" max="-2" attributes="0"/>
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnConfiguracoes" min="-2" pref="183" max="-2" attributes="0"/>
+                      <Component id="btnCadProduto" min="-2" pref="183" max="-2" attributes="0"/>
+                      <Component id="btnCadFornecedor" min="-2" pref="183" max="-2" attributes="0"/>
+                      <Component id="btnCadUsuario" min="-2" pref="183" max="-2" attributes="0"/>
+                      <Component id="btnCadCliente" min="-2" pref="183" max="-2" attributes="0"/>
+                      <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -155,6 +160,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Produto"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCadProdutoActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnPdv">
           <Properties>
@@ -163,6 +171,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="PDV"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPdvActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnOrcamento">
           <Properties>
@@ -193,8 +204,11 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="2" name="C:\Users\Camila\Downloads\Imagens software\aplica&#xe7;&#xe3;o\devolu&#xe7;&#xe3;o (1).png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Devolu&#xe7;&#xe3;o mercadoria"/>
+            <Property name="text" type="java.lang.String" value="Estoque / Devolu&#xe7;&#xe3;o"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDevolucaoActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnConfiguracoes">
           <Properties>

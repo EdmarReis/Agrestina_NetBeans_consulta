@@ -24,12 +24,12 @@ public class LoginPdv extends javax.swing.JFrame {
     public LoginPdv() {
         initComponents();
         setLocationRelativeTo(null);
-	conexao = ConnectionFactory.conector(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-	System.out.println(conexao);
+        conexao = ConnectionFactory.conector(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        System.out.println(conexao);
     }
-    
+
     public static int usuario;
-    
+    int numeroTela = 0;
     Connection conexao = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
@@ -152,38 +152,65 @@ public class LoginPdv extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     public void logar() {
-		String sql = "select * from login where nome=? and senha=?";
-		
-		try {
-			pst = conexao.prepareStatement(sql);
-			pst.setString(1, txtUsuario.getText());
-			pst.setString(2, txtSenha.getText());
-			rs = pst.executeQuery();
-			
-			if(rs.next()) {
-                                Cliente cliente = new Cliente();
-                                cliente.setNome(txtUsuario.getText());
-				TelaPdv principal = new TelaPdv();
-                                Cadastro cadastro = new Cadastro();
-                                Estoque estoque = new Estoque();
-                                
-				principal.setVisible(true);
-				principal.setResizable(false);
-				principal.setLocationRelativeTo(null);                                
-                                principal.exportarNome(cliente);
-                                
-                                Logger.getLogger(TelaPdv.class.getName()).log(Level.WARNING, "Usuário "+txtUsuario.getText()+" logado", "");
-                                this.dispose();
-				conexao.close();
-			}else {
-				JOptionPane.showMessageDialog(null, "Usuário e/ou senha inválido(s)");
-                                Logger.getLogger(TelaPdv.class.getName()).log(Level.SEVERE, "Tentativa de login, usuario "+txtUsuario.getText(), "");
-			}
+        String sql = "select * from login where nome=? and senha=?";
 
-		} catch (Exception e) {
-			// TODO: handle exception
-			JOptionPane.showMessageDialog(null, e);
-		}
-	}
+        try {
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1, txtUsuario.getText());
+            pst.setString(2, txtSenha.getText());
+            rs = pst.executeQuery();
+
+            if (rs.next()) {
+                Cliente cliente = new Cliente();
+                cliente.setNome(txtUsuario.getText());
+                TelaPdv telaPdv = new TelaPdv();
+                CadastroProdutos cadProduto = new CadastroProdutos();
+                CadastroClientes cadCliente = new CadastroClientes();
+                EstoqueTela estoque = new EstoqueTela();
+
+                switch (numeroTela) {
+                    case 1:
+                        telaPdv.setVisible(true);
+                        telaPdv.setResizable(false);
+                        telaPdv.setLocationRelativeTo(null);
+                        telaPdv.exportarNome(cliente);
+                        break;
+                    case 2:
+                        cadCliente.setVisible(true);
+                        cadCliente.setResizable(false);
+                        cadCliente.setLocationRelativeTo(null);
+                        cadCliente.exportarNome(cliente);
+                        break;
+                    case 3:
+                        cadProduto.setVisible(true);
+                        cadProduto.setResizable(false);
+                        cadProduto.setLocationRelativeTo(null);
+                        cadProduto.exportarNome(cliente);
+                        break;
+                    case 4:
+                        estoque.setVisible(true);
+                        estoque.setResizable(false);
+                        estoque.setLocationRelativeTo(null);
+                        break;
+
+                }
+
+                Logger.getLogger(TelaPdv.class.getName()).log(Level.WARNING, "Usuario " + txtUsuario.getText() + " logado", "");
+                this.dispose();
+                conexao.close();
+            } else {
+                JOptionPane.showMessageDialog(null, "Usuário e/ou senha inválido(s)");
+                Logger.getLogger(TelaPdv.class.getName()).log(Level.SEVERE, "Tentativa de login, usuario " + txtUsuario.getText(), "");
+            }
+
+        } catch (Exception e) {
+            // TODO: handle exception
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+
+    void selecionaTela(int tela) {
+        numeroTela = tela;
+    }
 
 }
