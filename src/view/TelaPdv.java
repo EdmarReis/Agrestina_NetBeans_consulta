@@ -859,7 +859,8 @@ public class TelaPdv extends javax.swing.JFrame {
     }//GEN-LAST:event_cbUnidadeActionPerformed
 
     private void txtCodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyReleased
-
+        pesquisarProduto();
+        
     }//GEN-LAST:event_txtCodigoKeyReleased
 
     private void txtCodigoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyPressed
@@ -868,6 +869,7 @@ public class TelaPdv extends javax.swing.JFrame {
 
     private void txtProdutoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProdutoKeyReleased
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_txtProdutoKeyReleased
 
     private void rbCreditoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbCreditoActionPerformed
