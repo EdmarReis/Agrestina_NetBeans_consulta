@@ -649,6 +649,11 @@ public class TelaPdv extends javax.swing.JFrame {
 
     private void btnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarActionPerformed
         // TODO add your handling code here:
+        
+        finalizaVenda();
+    }//GEN-LAST:event_btnFinalizarActionPerformed
+
+    public void finalizaVenda(){
         int question = JOptionPane.showConfirmDialog(null, "Deseja finalizar o pedido do cliente " + cbNomeCliente.getSelectedItem() + "?", "Atenção", JOptionPane.YES_NO_OPTION);
         if (question == JOptionPane.YES_OPTION) {
 
@@ -656,6 +661,7 @@ public class TelaPdv extends javax.swing.JFrame {
             Cliente nomeToCliente = new Cliente();
             Produto precoToProduto = new Produto();
             VendaProdutoDAO vendaProdutoDao = new VendaProdutoDAO();
+            FinalizaVenda finalizaVenda = new FinalizaVenda();
             try {
                 if (tblProdutos.getRowCount() > 0 && (rbCredito.isSelected() || rbDebito.isSelected() || rbDinheiro.isSelected())) {
                     String nomeCliente = cbNomeCliente.getSelectedItem().toString();
@@ -687,6 +693,14 @@ public class TelaPdv extends javax.swing.JFrame {
                         formaPagamento = "Dinheiro";
                         txtAcrecimo.setText("6");
                     }
+                    
+                    //AQUI
+                    finalizaVenda.finaliza(txtValor.getText(), txtDesconto.getText(), txtTotal.getText());
+                    //FinalizaVenda finalizaVenda = new FinalizaVenda();
+                    finalizaVenda.setVisible(true);
+                    finalizaVenda.setResizable(false);
+                    
+                    finalizaVenda.setLocationRelativeTo(null);
 
                     System.out.println(anoCompleto);
                     System.out.println(formaPagamento);
@@ -752,8 +766,8 @@ public class TelaPdv extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Venda nao finalizada, continue adicionando produtos ou finalize a venda.", "Aviso", JOptionPane.WARNING_MESSAGE);
         }
-    }//GEN-LAST:event_btnFinalizarActionPerformed
-
+    }
+    
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
 
         try {
@@ -979,7 +993,7 @@ public class TelaPdv extends javax.swing.JFrame {
     }
 
     //soma os valores da coluna valor do jtable
-    private float somaValor() {
+    public float somaValor() {
         float soma = 0, valor = 0;
         int cont = tblProdutos.getRowCount();
         for (int i = 0; i < cont; i++) {
