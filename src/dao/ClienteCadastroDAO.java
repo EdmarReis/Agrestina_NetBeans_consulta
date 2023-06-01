@@ -6,6 +6,7 @@ package dao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -23,7 +24,7 @@ public class ClienteCadastroDAO {
     PreparedStatement pst = null;
     ResultSet rs = null;
     
-    public void alterarCliente(String nome, String endereco, String telefone, String email, String cpfCnpj, boolean ativo, boolean inativo) {
+    public void alterarCliente(String nome, String endereco, String telefone, String email, String cpfCnpj, boolean ativo, boolean inativo) throws SQLException {
         conexao = ConnectionFactory.conector(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         String sql = "update clientes set nome = ?, endereco = ?, telefone = ?, email = ?, ativo = ? where cpf_cnpj = ?";
         try {
@@ -52,10 +53,10 @@ public class ClienteCadastroDAO {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
-
+        conexao.close();
     }      
     
-    public void salvarCliente(String nome, String endereco, String cpfCnpj, String celular, String email, boolean ativo, boolean inativo) {
+    public void salvarCliente(String nome, String endereco, String cpfCnpj, String celular, String email, boolean ativo, boolean inativo) throws SQLException {
         conexao = ConnectionFactory.conector(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);       
         //String sql = "insert into clientes (nome,endereco,cpf_cnpj,telefone,email) values (?,?,?,?,?)";
         String sql = "insert into clientes (nome,endereco,cpf_cnpj,telefone,email,ativo) values (?,?,?,?,?,?)";
@@ -82,7 +83,7 @@ public class ClienteCadastroDAO {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e, "Erro!", JOptionPane.ERROR_MESSAGE);
         }
-
+        conexao.close();
     }
     
 }

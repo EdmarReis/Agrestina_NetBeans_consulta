@@ -165,7 +165,11 @@ public class LoginPdv extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogarActionPerformed
-        logar();
+        try {
+            logar();
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginPdv.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnLogarActionPerformed
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
@@ -176,14 +180,22 @@ public class LoginPdv extends javax.swing.JFrame {
     private void txtUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyPressed
         // TODO add your handling code here:
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-            logar();
+            try {
+                logar();
+            } catch (SQLException ex) {
+                Logger.getLogger(LoginPdv.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_txtUsuarioKeyPressed
 
     private void txtSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSenhaKeyPressed
         // TODO add your handling code here:
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-            logar();
+            try {
+                logar();
+            } catch (SQLException ex) {
+                Logger.getLogger(LoginPdv.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_txtSenhaKeyPressed
 
@@ -237,8 +249,8 @@ public class LoginPdv extends javax.swing.JFrame {
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 
-    public void logar() {
-        String sql = "select * from login where nome=? and senha=?";
+    public void logar() throws SQLException {
+        String sql = "select * from login where nome=? and senha=? and ativo = true";
 
         try {
             pst = conexao.prepareStatement(sql);
@@ -254,6 +266,7 @@ public class LoginPdv extends javax.swing.JFrame {
                 CadastroClientes cadCliente = new CadastroClientes();
                 CadastroFornecedores cadFornecedor = new CadastroFornecedores();
                 EstoqueTela estoque = new EstoqueTela();
+                CadastroUsuarios usuario = new CadastroUsuarios();
 
                 switch (numeroTela) {
                     case 1:
@@ -285,6 +298,12 @@ public class LoginPdv extends javax.swing.JFrame {
                         cadFornecedor.setLocationRelativeTo(null);
                         cadFornecedor.exportarNome(cliente);
                         break;
+                    case 6:
+                        usuario.setVisible(true);
+                        usuario.setResizable(false);
+                        usuario.setLocationRelativeTo(null);
+                        usuario.exportarNome(cliente);
+                        break;
 
                 }
 
@@ -294,11 +313,13 @@ public class LoginPdv extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "Usuário e/ou senha inválido(s)");
                 Logger.getLogger(TelaPdv.class.getName()).log(Level.SEVERE, "Tentativa de login, usuario " + txtUsuario.getText(), "");
+                conexao.close();
             }
 
         } catch (Exception e) {
             // TODO: handle exception
             JOptionPane.showMessageDialog(null, e);
+            conexao.close();
         }
     }
 

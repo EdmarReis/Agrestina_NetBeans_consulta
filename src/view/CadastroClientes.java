@@ -280,8 +280,12 @@ public class CadastroClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_tblClientesMouseClicked
 
     private void txtNomeClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomeClienteKeyReleased
-        // TODO add your handling code here:
-        pesquisarClientes();
+        try {
+            // TODO add your handling code here:
+            pesquisarClientes();
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroClientes.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_txtNomeClienteKeyReleased
 
     private void btnLimparCLienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparCLienteActionPerformed
@@ -293,13 +297,22 @@ public class CadastroClientes extends javax.swing.JFrame {
         // TODO add your handling code here:
         UsuarioDAO usuarioDao = new UsuarioDAO();
         ClienteCadastroDAO clienteDAO = new ClienteCadastroDAO();
-        int verificaPerfil = usuarioDao.verificaPerfil(lblOperador.getText());
+        int verificaPerfil = 0;
+        try {
+            verificaPerfil = usuarioDao.verificaPerfil(lblOperador.getText());
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroClientes.class.getName()).log(Level.SEVERE, null, ex);
+        }
         if (verificaPerfil == 1) {
             if (txtNomeCliente.getText().equals("") || txtCelular.getText().equals("(  )      -    ") || txtEmail.getText().equals("") || txtEndereco.getText().equals("") || txtCpf.getText().equals("   .   .   -  ")) {
                 JOptionPane.showMessageDialog(null, "Existem campos vazios");
             } else {
-                //salvarCliente();
-                clienteDAO.salvarCliente(txtNomeCliente.getText(),txtEndereco.getText(),txtCpf.getText(),txtCelular.getText(),txtEmail.getText(),rbAtivo.isSelected(),rbInativo.isSelected());
+                try {
+                    //salvarCliente();
+                    clienteDAO.salvarCliente(txtNomeCliente.getText(),txtEndereco.getText(),txtCpf.getText(),txtCelular.getText(),txtEmail.getText(),rbAtivo.isSelected(),rbInativo.isSelected());
+                } catch (SQLException ex) {
+                    Logger.getLogger(CadastroClientes.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 limpaTelaCliente();
             }
         } else {
@@ -312,17 +325,30 @@ public class CadastroClientes extends javax.swing.JFrame {
         // TODO add your handling code here:
         UsuarioDAO usuarioDao = new UsuarioDAO();
         ClienteCadastroDAO clienteDAO = new ClienteCadastroDAO();
-        int verificaPerfil = usuarioDao.verificaPerfil(lblOperador.getText());
+        int verificaPerfil = 0;
+        try {
+            verificaPerfil = usuarioDao.verificaPerfil(lblOperador.getText());
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroClientes.class.getName()).log(Level.SEVERE, null, ex);
+        }
         if (verificaPerfil == 1 || verificaPerfil == 2) {
             int question = JOptionPane.showConfirmDialog(null, "Deseja Salvar as alterações?", "Atenção", JOptionPane.YES_NO_OPTION);
             if (txtNomeCliente.getText().equals("") || txtEndereco.getText().equals("") || txtCelular.getText().equals("") || txtCpf.getText().equals("") || txtEmail.getText().equals("")) {
                 JOptionPane.showMessageDialog(null, "Preencha todos os campos");
             } else {
                 if (question == JOptionPane.YES_OPTION) {
-                    //alterarCliente();
-                    clienteDAO.alterarCliente(txtNomeCliente.getText(),txtEndereco.getText(),txtCelular.getText(),txtEmail.getText(),txtCpf.getText(), rbAtivo.isSelected(),rbInativo.isSelected());
+                    try {
+                        //alterarCliente();
+                        clienteDAO.alterarCliente(txtNomeCliente.getText(),txtEndereco.getText(),txtCelular.getText(),txtEmail.getText(),txtCpf.getText(), rbAtivo.isSelected(),rbInativo.isSelected());
+                    } catch (SQLException ex) {
+                        Logger.getLogger(CadastroClientes.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     limpaTelaCliente();
-                    pesquisarClientes();
+                    try {
+                        pesquisarClientes();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(CadastroClientes.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 } else {
                     JOptionPane.showMessageDialog(null, "Nenhuma alteração foi realizada.", "Aviso", JOptionPane.WARNING_MESSAGE);
                 }
@@ -384,7 +410,7 @@ public class CadastroClientes extends javax.swing.JFrame {
         model.setRowCount(0);
     }
     
-    public void pesquisarClientes() {
+    public void pesquisarClientes() throws SQLException {
         String sql = "select * from clientes where nome like ? ORDER BY nome ASC";
         //String sql = "select * from clientes where nome like ? and ativo = true";
         try {
@@ -393,9 +419,10 @@ public class CadastroClientes extends javax.swing.JFrame {
             rs = pst.executeQuery();
 
             tblClientes.setModel(DbUtils.resultSetToTableModel(rs));
-
+            conexao.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
+            conexao.close();
         }
 
     }

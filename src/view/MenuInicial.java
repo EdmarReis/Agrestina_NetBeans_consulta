@@ -69,6 +69,11 @@ public class MenuInicial extends javax.swing.JFrame {
 
         btnCadUsuario.setIcon(new javax.swing.ImageIcon("C:\\Users\\Camila\\Downloads\\Imagens software\\aplicação\\adicionar-usuario (1).png")); // NOI18N
         btnCadUsuario.setText("Usuário");
+        btnCadUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadUsuarioActionPerformed(evt);
+            }
+        });
 
         btnCadFornecedor.setIcon(new javax.swing.ImageIcon("C:\\Users\\Camila\\Downloads\\Imagens software\\aplicação\\fornecedor (1).png")); // NOI18N
         btnCadFornecedor.setText("Fornecedor");
@@ -282,6 +287,11 @@ public class MenuInicial extends javax.swing.JFrame {
         // TODO add your handling code here:
         logar(5);
     }//GEN-LAST:event_btnCadFornecedorActionPerformed
+
+    private void btnCadUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadUsuarioActionPerformed
+        // TODO add your handling code here:
+        logar(6);
+    }//GEN-LAST:event_btnCadUsuarioActionPerformed
 
     /**
      * @param args the command line arguments

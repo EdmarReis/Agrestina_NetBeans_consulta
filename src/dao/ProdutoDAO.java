@@ -6,6 +6,7 @@ package dao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -21,7 +22,7 @@ public class ProdutoDAO {
     PreparedStatement pst = null;
     ResultSet rs = null;
     
-    public void alterarProduto(String preco, String produto, String descricao, String unidade, String caminhoFoto, String codigo, boolean ativo, boolean inativo) {
+    public void alterarProduto(String preco, String produto, String descricao, String unidade, String caminhoFoto, String codigo, boolean ativo, boolean inativo) throws SQLException {
     //public void alterarProduto(String preco, String produto, String descricao, String unidade, String caminhoFoto, String codigo) {    
         conexao = ConnectionFactory.conector(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         String sql = "update produtos set preco = ?, nome = ?, descricao = ?, unidade = ?, foto = ?, ativo = ? where codigo = ?";
@@ -48,13 +49,14 @@ public class ProdutoDAO {
             } else {
                 JOptionPane.showMessageDialog(null, "Nenhuma alteração foi realizada.", "Aviso", JOptionPane.WARNING_MESSAGE);
             }
-
+            conexao.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e, "Erro ao alterar!", JOptionPane.ERROR_MESSAGE);
+            conexao.close();
         }
     }
     
-    public void salvarProduto(String codigo, String preco, String descricao, String produto, String unidade, String caminhoFoto, boolean ativo, boolean inativo) {
+    public void salvarProduto(String codigo, String preco, String descricao, String produto, String unidade, String caminhoFoto, boolean ativo, boolean inativo) throws SQLException {
     //public void salvarProduto(String codigo, String preco, String descricao, String produto, String unidade, String caminhoFoto) {    
         conexao = ConnectionFactory.conector(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         String sql = "insert into produtos (codigo,preco,descricao,nome,unidade,foto,estoque,ativo) values (?,?,?,?,?,?,?,?)";
@@ -77,12 +79,14 @@ public class ProdutoDAO {
             pst.execute();
 
             JOptionPane.showMessageDialog(null, "Produto incluído com sucesso");
-
+            conexao.close();
         } catch (SQLIntegrityConstraintViolationException e) {
             // TODO: handle exception
             JOptionPane.showMessageDialog(null, "Código ja existe no banco ou algum registro obrigatório não foi preenchido. " + "\n" + e, "Erro!", JOptionPane.ERROR_MESSAGE);
+            conexao.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e, "Erro ao salvar!", JOptionPane.ERROR_MESSAGE);
+            conexao.close();
         }
     }
     

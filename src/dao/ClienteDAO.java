@@ -7,6 +7,7 @@ package dao;
 import com.sun.jdi.connect.spi.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -22,7 +23,7 @@ public class ClienteDAO {
     PreparedStatement pst = null;
     ResultSet rs = null;
    
-    public List listarCliente() {
+    public List listarCliente() throws SQLException {
         conexao = ConnectionFactory.conector(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         String sql = "select * from clientes where ativo = true order by nome ASC";
         List<Cliente> listaClientes = new ArrayList<Cliente>();
@@ -35,13 +36,16 @@ public class ClienteDAO {
                 Cliente cliente = new Cliente(nomeCliente);
                 listaClientes.add(cliente);
             }
+            conexao.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
+            conexao.close();
         }
         return listaClientes;
+        
     }
     
-    public List listarClientePeloNome(String nome) {
+    public List listarClientePeloNome(String nome) throws SQLException {
         conexao = ConnectionFactory.conector(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         String sql = "select * from clientes where nome like ?";
         List<Cliente> listaClientes = new ArrayList<Cliente>();
@@ -55,13 +59,16 @@ public class ClienteDAO {
                 Cliente cliente = new Cliente(nomeCliente);
                 listaClientes.add(cliente);
             }
+            conexao.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
+            conexao.close();
         }
         return listaClientes;
+        
     }
     
-    public void excluirCliente(String cnpjCpf) {
+    public void excluirCliente(String cnpjCpf) throws SQLException {
         conexao = ConnectionFactory.conector(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         String sql = "delete from clientes where cpf_cnpj = ?";
         try {
@@ -69,8 +76,10 @@ public class ClienteDAO {
             pst.setString(1, cnpjCpf);
             boolean alteracao = pst.execute();
             JOptionPane.showMessageDialog(null, "O Cliente com CNPJ/CPF " + cnpjCpf + " foi excluído", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            conexao.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
+            conexao.close();
         }
     }
     

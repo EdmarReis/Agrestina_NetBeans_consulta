@@ -27,7 +27,7 @@ public class EstoqueDAO {
     ResultSet rs = null;
     
 
-    public String pesquisaEstoque(double codigo) {
+    public String pesquisaEstoque(double codigo) throws SQLException {
         conexao = ConnectionFactory.conector(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         String sql = "select estoque from produtos where codigo = ?";
         //double estoque = 0;
@@ -39,23 +39,24 @@ public class EstoqueDAO {
             rs = pst.executeQuery();
             
             if (rs.next()) {
-                //estoque = rs.getDouble("estoque");
                 estoque = rs.getString("estoque");
             }//else{
             //    JOptionPane.showMessageDialog(null, "Código " + codigo + " não encontrado.", "Erro", JOptionPane.ERROR_MESSAGE);
             //    estoque = "";
             //}
+            //conexao.close();
             
         } catch (Exception e) {
             Logger.getLogger(EstoqueDAO.class.getName()).log(Level.INFO, "(EstoqueDAO)Erro ao pesquisar estoque!", "");
             JOptionPane.showMessageDialog(null, e, "(EstoqueDAO)Erro ao pesquisar o estoque!!!", JOptionPane.ERROR_MESSAGE);   
+            //conexao.close();
         } 
         
         //return Double.toString(estoque);
         return estoque;
     }
 
-    public String AtualizaEstoque(double entradaSaida, String codigo) {
+    public String AtualizaEstoque(double entradaSaida, String codigo) throws SQLException {
         
         conexao = ConnectionFactory.conector(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         String sql = "update produtos set estoque = ? where codigo = ?";
@@ -71,16 +72,17 @@ public class EstoqueDAO {
             if(result == 1){
                 JOptionPane.showMessageDialog(null, "Estoque atualizado ");
             }
-            
+            conexao.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e, "Erro ao atualizar o estoque!", JOptionPane.ERROR_MESSAGE);
+            conexao.close();
         }
         
         return pesquisaEstoque(Double.parseDouble(codigo));
         
     }
 
-    public String pesquisaNome(String nome) {
+    public String pesquisaNome(String nome) throws SQLException {
         
         conexao = ConnectionFactory.conector(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         String sql = "select nome from produtos where codigo = ?";
@@ -95,10 +97,11 @@ public class EstoqueDAO {
             if (rs.next()) {
                 nomeResult = rs.getString("nome");
             }
-            
+            conexao.close();
         } catch (Exception e) {
             Logger.getLogger(EstoqueDAO.class.getName()).log(Level.INFO, "(EstoqueDAO)Erro ao pesquisar nome!", "");
             JOptionPane.showMessageDialog(null, e, "(EstoqueDAO)Erro ao pesquisar o nome!!!", JOptionPane.ERROR_MESSAGE);   
+            conexao.close();
         } 
         
         //return Double.toString(estoque);

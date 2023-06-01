@@ -6,6 +6,7 @@ package dao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import javax.swing.JOptionPane;
 import utils.ConnectionFactory;
@@ -20,7 +21,7 @@ public class FornecedorDAO {
     PreparedStatement pst = null;
     ResultSet rs = null;
     
-    public void alterarFornecedor(String nome, String endereco, String telefone, String email, String cpfCnpj, boolean ativo, boolean inativo) {
+    public void alterarFornecedor(String nome, String endereco, String telefone, String email, String cpfCnpj, boolean ativo, boolean inativo) throws SQLException {
         conexao = ConnectionFactory.conector(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         String sql = "update fornecedores set nome = ?, endereco = ?, telefone = ?, email = ?, ativo = ? where cpf_cnpj = ?";
         try {
@@ -45,14 +46,15 @@ public class FornecedorDAO {
             } else {
                 JOptionPane.showMessageDialog(null, "Nenhuma alteração foi realizada.", "Aviso", JOptionPane.WARNING_MESSAGE);
             }
-
+            conexao.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
+            conexao.close();
         }
 
     }      
     
-    public void salvarFornecedor(String nome, String endereco, String cpfCnpj, String celular, String email, boolean ativo, boolean inativo) {
+    public void salvarFornecedor(String nome, String endereco, String cpfCnpj, String celular, String email, boolean ativo, boolean inativo) throws SQLException {
         conexao = ConnectionFactory.conector(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);       
         //String sql = "insert into clientes (nome,endereco,cpf_cnpj,telefone,email) values (?,?,?,?,?)";
         String sql = "insert into fornecedores (nome,endereco,cpf_cnpj,telefone,email,ativo) values (?,?,?,?,?,?)";
@@ -72,12 +74,14 @@ public class FornecedorDAO {
             pst.execute();
 
             JOptionPane.showMessageDialog(null, "Fornecedor incluído com sucesso");
-
+            conexao.close();
         } catch (SQLIntegrityConstraintViolationException e) {
             // TODO: handle exception
             JOptionPane.showMessageDialog(null, "Não é possível inserir o mesmo CPF/CNPJ duas vezes." + "\n" + e, "Erro!", JOptionPane.ERROR_MESSAGE);
+            conexao.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e, "Erro!", JOptionPane.ERROR_MESSAGE);
+            conexao.close();
         }
 
     }

@@ -365,13 +365,22 @@ public class CadastroProdutos extends javax.swing.JFrame {
     private void btnSalvarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarProdutoActionPerformed
         ProdutoDAO produtoDao = new ProdutoDAO();
         UsuarioDAO usuarioDao = new UsuarioDAO();
-        int verificaPerfil = usuarioDao.verificaPerfil(lblOperadorPro.getText());
+        int verificaPerfil = 0;
+        try {
+            verificaPerfil = usuarioDao.verificaPerfil(lblOperadorPro.getText());
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroProdutos.class.getName()).log(Level.SEVERE, null, ex);
+        }
         if (verificaPerfil == 1) {
             if (txtProduto.getText().equals("") || txtCodigo.getText().equals("") || txtPreco.getText().equals("") || txtDescricao.getText().equals("") || lblFoto.getText().equals(null)) {
                 JOptionPane.showMessageDialog(null, "Preencha todos os campos");
             } else {
-                //salvarProduto();
-                produtoDao.salvarProduto(txtCodigo.getText(), txtPreco.getText(), txtDescricao.getText(), txtProduto.getText(), (String) cbUnidade.getSelectedItem(), caminhoFoto,rbAtivoPro.isSelected(),rbInativoPro.isSelected());
+                try {
+                    //salvarProduto();
+                    produtoDao.salvarProduto(txtCodigo.getText(), txtPreco.getText(), txtDescricao.getText(), txtProduto.getText(), (String) cbUnidade.getSelectedItem(), caminhoFoto,rbAtivoPro.isSelected(),rbInativoPro.isSelected());
+                } catch (SQLException ex) {
+                    Logger.getLogger(CadastroProdutos.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 //produtoDao.salvarProduto(txtCodigo.getText(), txtPreco.getText(), txtDescricao.getText(), txtProduto.getText(), (String) cbUnidade.getSelectedItem(), caminhoFoto);
                 limpaTelaProduto();
             }
@@ -385,18 +394,31 @@ public class CadastroProdutos extends javax.swing.JFrame {
         // TODO add your handling code here:
         ProdutoDAO produtoDao = new ProdutoDAO();
         UsuarioDAO usuarioDao = new UsuarioDAO();
-        int verificaPerfil = usuarioDao.verificaPerfil(lblOperadorPro.getText());
+        int verificaPerfil = 0;
+        try {
+            verificaPerfil = usuarioDao.verificaPerfil(lblOperadorPro.getText());
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroProdutos.class.getName()).log(Level.SEVERE, null, ex);
+        }
         if (verificaPerfil == 1 || verificaPerfil == 2) {
             int question = JOptionPane.showConfirmDialog(null, "Deseja Salvar as alterações?", "Atenção", JOptionPane.YES_NO_OPTION);
             if (txtProduto.getText().equals("") || txtCodigo.getText().equals("") || txtPreco.getText().equals("") || txtDescricao.getText().equals("")) {
                 JOptionPane.showMessageDialog(null, "Preencha todos os campos");
             } else {
                 if (question == JOptionPane.YES_OPTION) {
-                    //alterarProduto();
-                    produtoDao.alterarProduto(txtPreco.getText(), txtProduto.getText(), txtDescricao.getText(), (String) cbUnidade.getSelectedItem(), caminhoFoto, txtCodigo.getText(),rbAtivoPro.isSelected(),rbInativoPro.isSelected());
+                    try {
+                        //alterarProduto();
+                        produtoDao.alterarProduto(txtPreco.getText(), txtProduto.getText(), txtDescricao.getText(), (String) cbUnidade.getSelectedItem(), caminhoFoto, txtCodigo.getText(),rbAtivoPro.isSelected(),rbInativoPro.isSelected());
+                    } catch (SQLException ex) {
+                        Logger.getLogger(CadastroProdutos.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     //produtoDao.alterarProduto(txtPreco.getText(), txtProduto.getText(), txtDescricao.getText(), (String) cbUnidade.getSelectedItem(), caminhoFoto, txtCodigo.getText());
                     limpaTelaProduto();
-                    pesquisarProduto();
+                    try {
+                        pesquisarProduto();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(CadastroProdutos.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 } else {
                     JOptionPane.showMessageDialog(null, "Nenhuma alteração foi realizada.", "Aviso", JOptionPane.WARNING_MESSAGE);
                 }
@@ -437,8 +459,12 @@ public class CadastroProdutos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnFindFotoActionPerformed
 
     private void txtProdutoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProdutoKeyReleased
-        // TODO add your handling code here:
-        pesquisarProduto();
+        try {
+            // TODO add your handling code here:
+            pesquisarProduto();
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroProdutos.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_txtProdutoKeyReleased
 
     private void tblProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProdutosMouseClicked
@@ -621,7 +647,7 @@ public class CadastroProdutos extends javax.swing.JFrame {
     
     
      //metodo para preencher automaticamente a jtable com like do que for digitado no campo produto - funciona junto com o evento de key do campo produto
-    private void pesquisarProduto() {
+    private void pesquisarProduto() throws SQLException {
         String sql = "SELECT * FROM produtos WHERE nome LIKE ? ORDER BY nome";
         try {
             pst = conexao.prepareStatement(sql);
@@ -629,9 +655,10 @@ public class CadastroProdutos extends javax.swing.JFrame {
             rs = pst.executeQuery();
 
             tblProdutos.setModel(DbUtils.resultSetToTableModel(rs));
-
+            conexao.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
+            conexao.close();
         }
 
     }

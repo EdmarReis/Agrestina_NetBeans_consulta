@@ -15,6 +15,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -75,6 +77,7 @@ public class TelaPdv extends javax.swing.JFrame {
         rbDebito = new javax.swing.JRadioButton();
         rbCredito = new javax.swing.JRadioButton();
         jLabel2 = new javax.swing.JLabel();
+        rbPix = new javax.swing.JRadioButton();
         jPanel7 = new javax.swing.JPanel();
         txtProduto = new javax.swing.JTextField();
         lblProduto = new javax.swing.JLabel();
@@ -172,33 +175,45 @@ public class TelaPdv extends javax.swing.JFrame {
 
         jLabel2.setText("Forma de pagamento");
 
+        btngFormaDePagamento.add(rbPix);
+        rbPix.setText("Pix");
+        rbPix.setEnabled(false);
+        rbPix.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbPixActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
+                .addComponent(jLabel2)
+                .addGap(0, 18, Short.MAX_VALUE))
+            .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(rbDinheiro)
                     .addComponent(rbDebito)
-                    .addComponent(rbCredito))
+                    .addComponent(rbCredito)
+                    .addComponent(rbPix))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addComponent(jLabel2)
-                .addGap(0, 18, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap(11, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(rbDinheiro)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(rbDebito)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(rbCredito)
-                .addGap(16, 16, 16))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(rbPix)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         txtProduto.setEditable(false);
@@ -585,7 +600,7 @@ public class TelaPdv extends javax.swing.JFrame {
                                 .addGap(59, 59, 59)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -648,12 +663,16 @@ public class TelaPdv extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTotalActionPerformed
 
     private void btnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarActionPerformed
-        // TODO add your handling code here:
-        
-        finalizaVenda();
+        try {
+            // TODO add your handling code here:
+
+            finalizaVenda();
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaPdv.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnFinalizarActionPerformed
 
-    public void finalizaVenda(){
+    public void finalizaVenda() throws SQLException{
         int question = JOptionPane.showConfirmDialog(null, "Deseja finalizar o pedido do cliente " + cbNomeCliente.getSelectedItem() + "?", "Atenção", JOptionPane.YES_NO_OPTION);
         if (question == JOptionPane.YES_OPTION) {
 
@@ -663,7 +682,7 @@ public class TelaPdv extends javax.swing.JFrame {
             VendaProdutoDAO vendaProdutoDao = new VendaProdutoDAO();
             FinalizaVenda finalizaVenda = new FinalizaVenda();
             try {
-                if (tblProdutos.getRowCount() > 0 && (rbCredito.isSelected() || rbDebito.isSelected() || rbDinheiro.isSelected())) {
+                if (tblProdutos.getRowCount() > 0 && (rbCredito.isSelected() || rbDebito.isSelected() || rbDinheiro.isSelected() || rbPix.isSelected())) {
                     String nomeCliente = cbNomeCliente.getSelectedItem().toString();
                     String nomeProduto;
                     String codigoProduto;
@@ -683,27 +702,27 @@ public class TelaPdv extends javax.swing.JFrame {
 
                     if (rbCredito.isSelected()) {
                         formaPagamento = "Crédito";
-                        txtAcrecimo.setText("0");
+                        //txtAcrecimo.setText("0");
                     }
                     if (rbDebito.isSelected()) {
                         formaPagamento = "Débito";
-                        txtAcrecimo.setText("3");
+                        //txtAcrecimo.setText("3");
                     }
                     if (rbDinheiro.isSelected()) {
                         formaPagamento = "Dinheiro";
-                        txtAcrecimo.setText("6");
+                        //txtAcrecimo.setText("6");
+                    }    
+                    if (rbPix.isSelected()) {
+                        formaPagamento = "Pix";
+                        //txtAcrecimo.setText("0");
                     }
                     
-                    //AQUI
+                    /*Nova tela de pagamento
                     finalizaVenda.finaliza(txtValor.getText(), txtDesconto.getText(), txtTotal.getText());
-                    //FinalizaVenda finalizaVenda = new FinalizaVenda();
+                    FinalizaVenda finalizaVenda = new FinalizaVenda();
                     finalizaVenda.setVisible(true);
                     finalizaVenda.setResizable(false);
-                    
-                    finalizaVenda.setLocationRelativeTo(null);
-
-                    System.out.println(anoCompleto);
-                    System.out.println(formaPagamento);
+                    finalizaVenda.setLocationRelativeTo(null);*/
 
                     for (int i = 0; i < tblProdutos.getRowCount(); i++) {
                         codigoProduto = (String) tblProdutos.getValueAt(i, 1);
@@ -715,7 +734,6 @@ public class TelaPdv extends javax.swing.JFrame {
 
                         //insertVendaProduto(codigoProduto, nomeProduto, quantidade, precoUnitario, desconto, precoTotal, formaPagamento, data, operador, nomeCliente);
                         vendaProdutoDao.insertVendaProduto(codigoProduto, nomeProduto, quantidade, precoUnitario, desconto, precoTotal, formaPagamento, anoCompleto, operador, nomeCliente);
-
                     }
 
                     Double campoTotal = Double.parseDouble(txtTotal.getText() + txtAcrecimo.getText());
@@ -730,6 +748,11 @@ public class TelaPdv extends javax.swing.JFrame {
                     btnAdicionar.setEnabled(true);
                     btnRemover.setEnabled(true);
                     btngFormaDePagamento.clearSelection();
+                    txtCodigo.setEnabled(true);
+                    rbCredito.setEnabled(false);
+                    rbDebito.setEnabled(false);
+                    rbDinheiro.setEnabled(false);
+                    rbPix.setEnabled(false);
                     System.out.println("Venda finalizada com sucesso");
 
                 } else if (tblProdutos.getRowCount() == 0) {
@@ -739,6 +762,7 @@ public class TelaPdv extends javax.swing.JFrame {
                     rbDinheiro.setEnabled(true);
                     rbDebito.setEnabled(true);
                     rbCredito.setEnabled(true);
+                    rbPix.setEnabled(true);
                     txtCodigo.setEnabled(false);
                     cbNomeCliente.setEnabled(false);
                     btnAdicionar.setEnabled(false);
@@ -844,7 +868,11 @@ public class TelaPdv extends javax.swing.JFrame {
             codigoProduto = (String) tblProdutos.getValueAt(i, 1);
             quantidade = Double.parseDouble((String) tblProdutos.getValueAt(i, 3));
 
-            vendaProdutoDao.acertoEstoqueBtnLimpar(codigoProduto, quantidade);
+            try {
+                vendaProdutoDao.acertoEstoqueBtnLimpar(codigoProduto, quantidade);
+            } catch (SQLException ex) {
+                Logger.getLogger(TelaPdv.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
         limpaTelaProdutoTabela();
@@ -862,7 +890,11 @@ public class TelaPdv extends javax.swing.JFrame {
         ClienteDAO clienteDao = new ClienteDAO();
         List<Cliente> listaClientes = new ArrayList<Cliente>();
 
-        listaClientes = clienteDao.listarCliente();
+        try {
+            listaClientes = clienteDao.listarCliente();
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaPdv.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         DefaultComboBoxModel model = new DefaultComboBoxModel(listaClientes.toArray());
         cbNomeCliente.setModel(model);
@@ -873,7 +905,11 @@ public class TelaPdv extends javax.swing.JFrame {
     }//GEN-LAST:event_cbUnidadeActionPerformed
 
     private void txtCodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyReleased
-        pesquisarProduto();
+        try {
+            pesquisarProduto();
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaPdv.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_txtCodigoKeyReleased
 
@@ -938,6 +974,18 @@ public class TelaPdv extends javax.swing.JFrame {
             this.dispose();
         }
     }//GEN-LAST:event_btnSairActionPerformed
+
+    private void rbPixActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbPixActionPerformed
+        // TODO add your handling code here:
+        float total = somaValor();
+        if (rbPix.isSelected()) {
+            rbDebito.setSelected(false);
+            rbCredito.setSelected(false);
+            rbDinheiro.setSelected(false);
+            txtAcrecimo.setText("0");
+            txtTotal.setText(total + "");
+        }
+    }//GEN-LAST:event_rbPixActionPerformed
 
     
    
@@ -1052,7 +1100,7 @@ public class TelaPdv extends javax.swing.JFrame {
         });
     }
 
-    private void excluirProduto() {
+    private void excluirProduto() throws SQLException {
         String sql = "delete from produtos where codigo = ?";
         String sqlConsultaProduto = "select * from produtos where codigo = ?";
         try {
@@ -1066,16 +1114,18 @@ public class TelaPdv extends javax.swing.JFrame {
 
                 boolean alteracao = pst.execute();
                 JOptionPane.showMessageDialog(null, "O Produto com código " + txtCodigo.getText() + " foi excluído.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-
+                conexao.close();
             } else {
                 JOptionPane.showMessageDialog(null, "Exclusão não efetuada. Não foi encontrado produto com código " + txtCodigo.getText(), "Erro!", JOptionPane.ERROR_MESSAGE);
+                conexao.close();
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
+            conexao.close();
         }
     }
 
-    private void alterarProduto() {
+    private void alterarProduto() throws SQLException {
         String sql = "update produtos set preco = ?, nome = ?, descricao = ?, unidade = ?, foto = ? where codigo = ?";
         try {
             pst = conexao.prepareStatement(sql);
@@ -1094,14 +1144,15 @@ public class TelaPdv extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "Nenhuma alteração foi realizada.", "Aviso", JOptionPane.WARNING_MESSAGE);
             }
-
+            conexao.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e, "Erro!", JOptionPane.ERROR_MESSAGE);
+            conexao.close();
         }
     }
 
     //metodo para preencher automaticamente a jtable com like do que for digitado no campo produto - funciona junto com o evento de key do campo produto
-    private void pesquisarProduto() {
+    private void pesquisarProduto() throws SQLException {
         conexao = ConnectionFactory.conector(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         String sql = "select * from produtos where codigo = ?";
         try {
@@ -1119,16 +1170,19 @@ public class TelaPdv extends javax.swing.JFrame {
 
                 ImageIcon imageIcon = new ImageIcon(new ImageIcon(rs.getString("foto")).getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT));
                 lblFoto.setIcon(imageIcon);
+                conexao.close();
 
             } else {
                 //JOptionPane.showMessageDialog(null, "Nao entrou ");
                 limpaTelaProdutoMantemCodigo();
                 txtProduto.setText(null);
+                conexao.close();
             }
             //tblProdutos.setModel(DbUtils.resultSetToTableModel(rs));
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
+            conexao.close();
         }
     }
 
@@ -1185,6 +1239,7 @@ public class TelaPdv extends javax.swing.JFrame {
         rbDinheiro.setEnabled(false);
         rbDebito.setEnabled(false);
         rbCredito.setEnabled(false);
+        rbPix.setEnabled(false);
         txtCodigo.setEnabled(true);
         cbNomeCliente.setEnabled(true);
         btnAdicionar.setEnabled(true);
@@ -1204,7 +1259,7 @@ public class TelaPdv extends javax.swing.JFrame {
         txtEstoque.setText(null);
     }
 
-    private void salvarProduto() {
+    private void salvarProduto() throws SQLException {
 
         String sql = "insert into produtos (codigo,preco,descricao,nome,unidade,foto) values (?,?,?,?,?,?)";
         try {
@@ -1219,10 +1274,11 @@ public class TelaPdv extends javax.swing.JFrame {
             pst.execute();
 
             JOptionPane.showMessageDialog(null, "Produto incluído com sucesso");
-
+            conexao.close();
         } catch (SQLIntegrityConstraintViolationException e) {
             // TODO: handle exception
             JOptionPane.showMessageDialog(null, "Não é possível inserir o mesmo código duas vezes." + "\n" + e, "Erro!", JOptionPane.ERROR_MESSAGE);
+            conexao.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e, "Erro!", JOptionPane.ERROR_MESSAGE);
         }
@@ -1329,6 +1385,7 @@ public class TelaPdv extends javax.swing.JFrame {
     private javax.swing.JRadioButton rbCredito;
     private javax.swing.JRadioButton rbDebito;
     private javax.swing.JRadioButton rbDinheiro;
+    private javax.swing.JRadioButton rbPix;
     private javax.swing.JTabbedPane tab;
     private javax.swing.JTable tblProdutos;
     private javax.swing.JTextField txtAcrecimo;

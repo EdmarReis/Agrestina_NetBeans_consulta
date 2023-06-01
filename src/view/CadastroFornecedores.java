@@ -7,6 +7,8 @@ package view;
 import dao.FornecedorDAO;
 import dao.UsuarioDAO;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -262,8 +264,12 @@ public class CadastroFornecedores extends javax.swing.JFrame {
     }//GEN-LAST:event_tblFornecedoresMouseClicked
 
     private void txtNomeFornecedorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomeFornecedorKeyReleased
-        // TODO add your handling code here:
-        pesquisarFornecedor();
+        try {
+            // TODO add your handling code here:
+            pesquisarFornecedor();
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroFornecedores.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_txtNomeFornecedorKeyReleased
 
     private void btnLimparFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparFornecedorActionPerformed
@@ -275,13 +281,22 @@ public class CadastroFornecedores extends javax.swing.JFrame {
         // TODO add your handling code here:
         UsuarioDAO usuarioDao = new UsuarioDAO();
         FornecedorDAO fornecedorDAO = new FornecedorDAO();
-        int verificaPerfil = usuarioDao.verificaPerfil(lblOperador.getText());
+        int verificaPerfil = 0;
+        try {
+            verificaPerfil = usuarioDao.verificaPerfil(lblOperador.getText());
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroFornecedores.class.getName()).log(Level.SEVERE, null, ex);
+        }
         if (verificaPerfil == 1) {
             if (txtNomeFornecedor.getText().equals("") || txtTelefoneFornecedor.getText().equals("(  )      -    ") || txtEmailFornecedor.getText().equals("") || txtEnderecoFornecedor.getText().equals("") || txtCpfCnpjFornecedor.getText().equals("   .   .   -  ")) {
                 JOptionPane.showMessageDialog(null, "Existem campos vazios");
             } else {
-                //salvarCliente();
-                fornecedorDAO.salvarFornecedor(txtNomeFornecedor.getText(),txtEnderecoFornecedor.getText(),txtCpfCnpjFornecedor.getText(),txtTelefoneFornecedor.getText(),txtEmailFornecedor.getText(),rbAtivo.isSelected(),rbInativo.isSelected());
+                try {
+                    //salvarCliente();
+                    fornecedorDAO.salvarFornecedor(txtNomeFornecedor.getText(),txtEnderecoFornecedor.getText(),txtCpfCnpjFornecedor.getText(),txtTelefoneFornecedor.getText(),txtEmailFornecedor.getText(),rbAtivo.isSelected(),rbInativo.isSelected());
+                } catch (SQLException ex) {
+                    Logger.getLogger(CadastroFornecedores.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 limpaTelaFornecedor();
             }
         } else {
@@ -294,17 +309,30 @@ public class CadastroFornecedores extends javax.swing.JFrame {
         // TODO add your handling code here:
         UsuarioDAO usuarioDao = new UsuarioDAO();
         FornecedorDAO fornecedorDAO = new FornecedorDAO();
-        int verificaPerfil = usuarioDao.verificaPerfil(lblOperador.getText());
+        int verificaPerfil = 0;
+        try {
+            verificaPerfil = usuarioDao.verificaPerfil(lblOperador.getText());
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroFornecedores.class.getName()).log(Level.SEVERE, null, ex);
+        }
         if (verificaPerfil == 1 || verificaPerfil == 2) {
             int question = JOptionPane.showConfirmDialog(null, "Deseja Salvar as alterações?", "Atenção", JOptionPane.YES_NO_OPTION);
             if (txtNomeFornecedor.getText().equals("") || txtEnderecoFornecedor.getText().equals("") || txtTelefoneFornecedor.getText().equals("") || txtCpfCnpjFornecedor.getText().equals("") || txtEmailFornecedor.getText().equals("")) {
                 JOptionPane.showMessageDialog(null, "Preencha todos os campos");
             } else {
                 if (question == JOptionPane.YES_OPTION) {
-                    //alterarCliente();
-                    fornecedorDAO.alterarFornecedor(txtNomeFornecedor.getText(),txtEnderecoFornecedor.getText(),txtTelefoneFornecedor.getText(),txtEmailFornecedor.getText(),txtCpfCnpjFornecedor.getText(), rbAtivo.isSelected(),rbInativo.isSelected());
+                    try {
+                        //alterarCliente();
+                        fornecedorDAO.alterarFornecedor(txtNomeFornecedor.getText(),txtEnderecoFornecedor.getText(),txtTelefoneFornecedor.getText(),txtEmailFornecedor.getText(),txtCpfCnpjFornecedor.getText(), rbAtivo.isSelected(),rbInativo.isSelected());
+                    } catch (SQLException ex) {
+                        Logger.getLogger(CadastroFornecedores.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     limpaTelaFornecedor();
-                    pesquisarFornecedor();
+                    try {
+                        pesquisarFornecedor();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(CadastroFornecedores.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 } else {
                     JOptionPane.showMessageDialog(null, "Nenhuma alteração foi realizada.", "Aviso", JOptionPane.WARNING_MESSAGE);
                 }
@@ -367,7 +395,7 @@ public class CadastroFornecedores extends javax.swing.JFrame {
         model.setRowCount(0);
     }
     
-    public void pesquisarFornecedor() {
+    public void pesquisarFornecedor() throws SQLException {
         String sql = "select * from fornecedores where nome like ? ORDER BY nome ASC";
         //String sql = "select * from clientes where nome like ? and ativo = true";
         try {
@@ -376,9 +404,10 @@ public class CadastroFornecedores extends javax.swing.JFrame {
             rs = pst.executeQuery();
 
             tblFornecedores.setModel(DbUtils.resultSetToTableModel(rs));
-
+            conexao.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
+            conexao.close();
         }
 
     }

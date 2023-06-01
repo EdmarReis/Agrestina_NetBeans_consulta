@@ -7,6 +7,7 @@ package dao;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,7 @@ public class PedidoDAO {
     PreparedStatement pst = null;
     ResultSet rs = null;
    
-    public int numeroPedido() {
+    public int numeroPedido() throws SQLException {
         conexao = ConnectionFactory.conector(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         String sql = "select * from pedido order by id desc limit 1";
         int numero = 0;
@@ -38,13 +39,15 @@ public class PedidoDAO {
             while (rs.next()) {
                 numero = rs.getInt("id");
             }
+            conexao.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
+            conexao.close();
         }
         return numero;
     } 
     
-    public void insertPedido(Cliente nomeCliente, Produto precoTotal, String data, String operador) {
+    public void insertPedido(Cliente nomeCliente, Produto precoTotal, String data, String operador) throws SQLException {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
         conexao = ConnectionFactory.conector(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         TelaPdv cad = new TelaPdv();
@@ -65,12 +68,14 @@ public class PedidoDAO {
             JOptionPane.showMessageDialog(null, "Pedido número "+numeroPedido+" incluído com sucesso");
             
             imprimir.imprime(numeroPedido);
-
+            conexao.close();
         } catch (SQLIntegrityConstraintViolationException e) {
             // TODO: handle exception
             JOptionPane.showMessageDialog(null, "Número de pedido ja usado." + "\n" + e, "Erro!", JOptionPane.ERROR_MESSAGE);
+            conexao.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e, "Erro!!!", JOptionPane.ERROR_MESSAGE);
+            conexao.close();
         }
         
     }

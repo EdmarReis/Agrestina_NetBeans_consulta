@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.print.DocFlavor;
@@ -34,7 +35,7 @@ public class ImprimirDAO {
     PreparedStatement pst = null;
     ResultSet rs = null;
 
-    public void imprime(String numeroPedido) {
+    public void imprime(String numeroPedido) throws SQLException {
 
         conexao = ConnectionFactory.conector(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
@@ -54,11 +55,14 @@ public class ImprimirDAO {
         String cliente = "";
         String codigoProduto = "";
         String nomeProduto = "";
-        String quantidade = "";
-        String valor = "";
+        float quantidade = 0;
+        float valor = 0;
         float total = 0;
         float desconto = 0;
         float totalComDesconto = 0;
+        String formaPagamento = "";
+        float quantidadeValorUnitario = 0;
+        float totalSemDesconto = 0;
 
         String sql = "select * from vendaproduto where id_pedido = " + numeroPedido;
         //int numero = 0;
@@ -69,20 +73,24 @@ public class ImprimirDAO {
             while (rs.next()) {
                 codigoProduto = rs.getString("codigo_produto");
                 nomeProduto = rs.getString("nome_produto");
-                quantidade = rs.getFloat("quantidade") + "";
-                valor = rs.getFloat("preco_unitario")+"";
-                total += rs.getFloat("total");
+                quantidade = rs.getFloat("quantidade");
+                valor = rs.getFloat("preco_unitario");
+                quantidadeValorUnitario = valor*quantidade;
+                totalSemDesconto += quantidadeValorUnitario;
+                total += rs.getFloat("total");  // total com desconto
                 desconto += rs.getFloat("desconto");
                 operador = rs.getString("operador");
                 cliente = rs.getString("nome_cliente");
+                formaPagamento = rs.getString("forma_pagamento");
 
                 conteudoImprimir += quantidade + "  " + valor + "  " + nomeProduto + "\n\r";
 
-                System.out.println(conteudoImprimir);
+                
 
             }
             
-            totalComDesconto = total-desconto;
+            System.out.println(totalSemDesconto+"\n"+conteudoImprimir);
+            totalComDesconto = totalSemDesconto-desconto;
             
             this.imprimir(
                     "\n\r"
@@ -98,9 +106,10 @@ public class ImprimirDAO {
                     + "QTD  Preco(R$) Descricao        \n\r"
                     + conteudoImprimir +""
                     + "--------------------------------\n\r"
-                    + "Valor Bruto: R$ " + total + "   \n\r"
+                    + "Valor Bruto: R$ " + totalSemDesconto + "\n\r"
                     + "  Desconto: R$ " + desconto + " \n\r"
                     + "Valor total: R$ " + totalComDesconto + "\n\r"
+                    + "Forma de pagamento: "+ formaPagamento + "\n\r"        
                     + "--------------------------------\n\r"
                     + data + " - " + hora + "          \n\r"
                     + "Numero Pedido: "+numeroPedido+ "\n\r"
@@ -113,14 +122,10 @@ public class ImprimirDAO {
                     + "                                \n\r"
                     + "\f"
             );
-            
-            
-            
-            
-            
-            
+            conexao.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao montar arquivo para impressão \n"+e,"ERRO",JOptionPane.ERROR_MESSAGE);
+            conexao.close();
         }
 
     }
