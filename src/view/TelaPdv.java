@@ -701,11 +701,11 @@ public class TelaPdv extends javax.swing.JFrame {
                     String formaPagamento = null;
 
                     if (rbCredito.isSelected()) {
-                        formaPagamento = "Crédito";
+                        formaPagamento = "Credito";
                         //txtAcrecimo.setText("0");
                     }
                     if (rbDebito.isSelected()) {
-                        formaPagamento = "Débito";
+                        formaPagamento = "Debito";
                         //txtAcrecimo.setText("3");
                     }
                     if (rbDinheiro.isSelected()) {

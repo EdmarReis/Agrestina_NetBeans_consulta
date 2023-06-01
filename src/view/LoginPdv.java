@@ -250,6 +250,7 @@ public class LoginPdv extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     public void logar() throws SQLException {
+        conexao = ConnectionFactory.conector(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         String sql = "select * from login where nome=? and senha=? and ativo = true";
 
         try {
@@ -309,18 +310,19 @@ public class LoginPdv extends javax.swing.JFrame {
 
                 Logger.getLogger(TelaPdv.class.getName()).log(Level.WARNING, "Usuario " + txtUsuario.getText() + " logado", "");
                 this.dispose();
-                conexao.close();
+                
             } else {
                 JOptionPane.showMessageDialog(null, "Usuário e/ou senha inválido(s)");
                 Logger.getLogger(TelaPdv.class.getName()).log(Level.SEVERE, "Tentativa de login, usuario " + txtUsuario.getText(), "");
-                conexao.close();
+                
             }
 
         } catch (Exception e) {
             // TODO: handle exception
             JOptionPane.showMessageDialog(null, e);
-            conexao.close();
+            
         }
+        conexao.close();
     }
 
     void selecionaTela(int tela) {

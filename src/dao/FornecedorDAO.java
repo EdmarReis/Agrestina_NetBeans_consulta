@@ -74,15 +74,16 @@ public class FornecedorDAO {
             pst.execute();
 
             JOptionPane.showMessageDialog(null, "Fornecedor incluído com sucesso");
-            conexao.close();
+            
         } catch (SQLIntegrityConstraintViolationException e) {
             // TODO: handle exception
             JOptionPane.showMessageDialog(null, "Não é possível inserir o mesmo CPF/CNPJ duas vezes." + "\n" + e, "Erro!", JOptionPane.ERROR_MESSAGE);
-            conexao.close();
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e, "Erro!", JOptionPane.ERROR_MESSAGE);
-            conexao.close();
+            
         }
+        conexao.close();
 
     }
     

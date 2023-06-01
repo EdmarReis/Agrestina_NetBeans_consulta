@@ -331,6 +331,11 @@ public class CadastroUsuarios extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Perfil não autorizado para essa transação", "Erro", JOptionPane.ERROR_MESSAGE);
             limpaTelaUsuario();
         }
+        try {
+            conexao.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnAlterarUsuarioActionPerformed
 
     private void btnSalvarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarUsuarioActionPerformed
@@ -432,6 +437,7 @@ public class CadastroUsuarios extends javax.swing.JFrame {
     }
     
     public void pesquisarUsuario() throws SQLException {
+        conexao = ConnectionFactory.conector(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         String sql = "select id, nome, perfil, ativo from login where nome like ? ORDER BY nome ASC";
         //String sql = "select * from clientes where nome like ? and ativo = true";
         try {
@@ -440,11 +446,12 @@ public class CadastroUsuarios extends javax.swing.JFrame {
             rs = pst.executeQuery();
 
             tblUsuarios.setModel(DbUtils.resultSetToTableModel(rs));
-            conexao.close();
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
-            conexao.close();
+            
         }
+        conexao.close();
 
     }
     

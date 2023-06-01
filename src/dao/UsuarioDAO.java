@@ -39,10 +39,10 @@ public class UsuarioDAO {
             while (rs.next()) {
                 perfilUsuario = rs.getInt("perfil");
             }
-            conexao.close();
+            //conexao.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
-            conexao.close();
+            //conexao.close();
         }
         
         return perfilUsuario;
@@ -63,10 +63,10 @@ public class UsuarioDAO {
             }else{
                 JOptionPane.showMessageDialog(null, "Nao foi possivel buscar o ID");
             }
-            conexao.close();
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
-            conexao.close();
+            
         }
       
         return id;
@@ -99,12 +99,12 @@ public class UsuarioDAO {
             } else {
                 JOptionPane.showMessageDialog(null, "Nao foi possivel alterar usuario no banco de dados.", "Aviso", JOptionPane.WARNING_MESSAGE);
             }
-            conexao.close();
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro na classe DAO \n"+ e);
-            conexao.close();
+            
         }
-        
+        conexao.close();
     }
 
     public void salvarUsuario(String login, String perfil, String senha, boolean ativo, boolean inativo) throws SQLException {
@@ -126,16 +126,16 @@ public class UsuarioDAO {
             pst.execute();
 
             JOptionPane.showMessageDialog(null, "Usuario incluído com sucesso");
-            conexao.close();
+            
         } catch (SQLIntegrityConstraintViolationException e) {
             // TODO: handle exception
             JOptionPane.showMessageDialog(null, "Não é possível inserir o mesmo nome duas vezes." + "\n" + e, "Erro!", JOptionPane.ERROR_MESSAGE);
-            conexao.close();
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e, "Erro!", JOptionPane.ERROR_MESSAGE);
-            conexao.close();
+            
         }
-        
+        conexao.close();
     }
 
     public void alterarUsuarioSemSenha(String login, String perfil, boolean ativo, boolean inativo) throws SQLException {
@@ -164,10 +164,10 @@ public class UsuarioDAO {
             } else {
                 JOptionPane.showMessageDialog(null, "Nao foi possivel alterar usuario no banco de dados.", "Aviso", JOptionPane.WARNING_MESSAGE);
             }
-            conexao.close();
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro na classe DAO \n"+ e);
-            conexao.close();
+            
         }
         
     }

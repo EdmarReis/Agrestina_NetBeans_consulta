@@ -648,6 +648,7 @@ public class CadastroProdutos extends javax.swing.JFrame {
     
      //metodo para preencher automaticamente a jtable com like do que for digitado no campo produto - funciona junto com o evento de key do campo produto
     private void pesquisarProduto() throws SQLException {
+        conexao = ConnectionFactory.conector(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         String sql = "SELECT * FROM produtos WHERE nome LIKE ? ORDER BY nome";
         try {
             pst = conexao.prepareStatement(sql);
@@ -655,11 +656,12 @@ public class CadastroProdutos extends javax.swing.JFrame {
             rs = pst.executeQuery();
 
             tblProdutos.setModel(DbUtils.resultSetToTableModel(rs));
-            conexao.close();
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
-            conexao.close();
+            
         }
+        conexao.close();
 
     }
 

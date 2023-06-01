@@ -396,6 +396,7 @@ public class CadastroFornecedores extends javax.swing.JFrame {
     }
     
     public void pesquisarFornecedor() throws SQLException {
+        conexao = ConnectionFactory.conector(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         String sql = "select * from fornecedores where nome like ? ORDER BY nome ASC";
         //String sql = "select * from clientes where nome like ? and ativo = true";
         try {

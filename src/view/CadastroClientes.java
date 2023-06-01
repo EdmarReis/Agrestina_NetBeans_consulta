@@ -411,6 +411,7 @@ public class CadastroClientes extends javax.swing.JFrame {
     }
     
     public void pesquisarClientes() throws SQLException {
+        conexao = ConnectionFactory.conector(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         String sql = "select * from clientes where nome like ? ORDER BY nome ASC";
         //String sql = "select * from clientes where nome like ? and ativo = true";
         try {
@@ -419,11 +420,12 @@ public class CadastroClientes extends javax.swing.JFrame {
             rs = pst.executeQuery();
 
             tblClientes.setModel(DbUtils.resultSetToTableModel(rs));
-            conexao.close();
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
-            conexao.close();
+            
         }
+        conexao.close();
 
     }
     

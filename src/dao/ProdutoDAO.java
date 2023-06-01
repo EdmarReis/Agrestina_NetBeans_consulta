@@ -49,11 +49,12 @@ public class ProdutoDAO {
             } else {
                 JOptionPane.showMessageDialog(null, "Nenhuma alteração foi realizada.", "Aviso", JOptionPane.WARNING_MESSAGE);
             }
-            conexao.close();
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e, "Erro ao alterar!", JOptionPane.ERROR_MESSAGE);
-            conexao.close();
+            
         }
+        conexao.close();
     }
     
     public void salvarProduto(String codigo, String preco, String descricao, String produto, String unidade, String caminhoFoto, boolean ativo, boolean inativo) throws SQLException {
@@ -79,15 +80,17 @@ public class ProdutoDAO {
             pst.execute();
 
             JOptionPane.showMessageDialog(null, "Produto incluído com sucesso");
-            conexao.close();
+            
         } catch (SQLIntegrityConstraintViolationException e) {
             // TODO: handle exception
             JOptionPane.showMessageDialog(null, "Código ja existe no banco ou algum registro obrigatório não foi preenchido. " + "\n" + e, "Erro!", JOptionPane.ERROR_MESSAGE);
-            conexao.close();
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e, "Erro ao salvar!", JOptionPane.ERROR_MESSAGE);
-            conexao.close();
+            
         }
+        conexao.close();
+        
     }
     
 }
